@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  * Copyrights
  *
  * Portions created by or assigned to Cursive Systems, Inc. are
@@ -9,23 +9,20 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
-using System.ComponentModel;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
-using System.Net.Sockets;
-using System.Threading;
-using bedrock.util;
-
-using System.Security.Authentication;
 using System.Net.Security;
+using System.Net.Sockets;
+using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
+using ComponentAce.Compression.Libs.zlib;
 
-namespace bedrock.net
+namespace JabberNet.bedrock.net
 {
     /// <summary>
     /// Delegate for members that receive a socket.
@@ -36,14 +33,12 @@ namespace bedrock.net
     /// An asynchronous socket, which calls a listener class when
     /// interesting things happen.
     /// </summary>
-    [SVN(@"$Id$")]
     public class AsyncSocket : BaseSocket, IComparable
     {
         /// <summary>
         /// Socket states.
         /// </summary>
-        [SVN(@"$Id$")]
-            private enum SocketState
+        private enum SocketState
         {
             /// <summary>
             /// Socket has been created.
@@ -101,7 +96,6 @@ namespace bedrock.net
         ///
         /// Setting this modifies AllowedSSLErrors by side-effect.
         /// </summary>
-        [DefaultValue(false)]
         [Obsolete("Catch OnInvalidCertificate, instead")]
         public static bool UntrustedRootOK
         {
@@ -622,10 +616,10 @@ namespace bedrock.net
                     // TODO: check to see if this Mono bug is still valid
 #if __MonoCS__
                     m_sock.Blocking = true;
-                    m_stream = new NetworkStream(m_sock);
+                    m_stream = new NetworkStream(m_sock, true);
                     m_sock.Blocking = false;
 #else
-                    m_stream = new NetworkStream(m_sock);
+                    m_stream = new NetworkStream(m_sock, true);
 #endif
                     if (m_secureProtocol != SslProtocols.None)
                         StartTLS();
@@ -764,7 +758,7 @@ namespace bedrock.net
         /// </summary>
         public override void StartCompression()
         {
-            m_stream = new bedrock.io.ZlibStream(m_stream, ComponentAce.Compression.Libs.zlib.zlibConst.Z_FULL_FLUSH);
+            m_stream = new io.ZlibStream(m_stream, zlibConst.Z_FULL_FLUSH);
         }
 
         /// <summary>

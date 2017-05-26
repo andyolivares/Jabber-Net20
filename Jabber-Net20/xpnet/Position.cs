@@ -9,14 +9,14 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  *
- * xpnet is a deriviative of James Clark's XP.  See copying.txt for more info.
+ * xpnet is a deriviative of James Clark's XP.  See licenses/xpnet_MIT.txt for
+ * more info.
  * --------------------------------------------------------------------------*/
-namespace xpnet
-{
-    using bedrock.util;
 
+namespace JabberNet.xpnet
+{
     /**
      * Represents a position in an entity.
      * A position can be modified by <code>Encoding.movePosition</code>.
@@ -26,7 +26,6 @@ namespace xpnet
     ///<summary>
     /// Position of an entry in a table.
     ///</summary>
-    [SVN(@"$Id$")]
     public class Position : System.ICloneable
     {
         private int lineNumber;

@@ -9,15 +9,12 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
 using System.Xml;
 
-using bedrock.util;
-
-namespace jabber.protocol.iq
+namespace JabberNet.jabber.protocol.iq
 {
     /*
      * <iq type="set" to="horatio@denmark" from="sailor@sea" id="i_oob_001">
@@ -30,7 +27,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// IQ packet with an oob query element inside.
     /// </summary>
-    [SVN(@"$Id$")]
     public class OobIQ : jabber.protocol.client.TypedIQ<OOB>
     {
         /// <summary>
@@ -45,7 +41,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// An oob query element for file transfer.
     /// </summary>
-    [SVN(@"$Id$")]
     public class OOB : Element
     {
         /// <summary>

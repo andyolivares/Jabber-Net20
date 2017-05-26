@@ -9,22 +9,17 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
-using System.Diagnostics;
-using System.Security.Cryptography;
+using System;
 using System.Xml;
 
-using bedrock.util;
-
-namespace jabber.protocol.iq
+namespace JabberNet.jabber.protocol.iq
 {
     /// <summary>
     /// A GeoLoc IQ.
     /// </summary>
-    [SVN(@"$Id$")]
     public class GeoLocIQ : jabber.protocol.client.TypedIQ<GeoLoc>
     {
         /// <summary>
@@ -39,7 +34,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// Geographic location.  See http://www.xmpp.org/extensions/xep-0080.html.
     /// </summary>
-    [SVN(@"$Id$")]
     public class GeoLoc : Element
     {
         /// <summary>

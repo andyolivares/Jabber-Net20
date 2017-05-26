@@ -1,4 +1,4 @@
-﻿/* --------------------------------------------------------------------------
+/* --------------------------------------------------------------------------
  * Copyrights
  *
  * Portions created by or assigned to Cursive Systems, Inc. are
@@ -14,18 +14,14 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using System.Xml;
+using JabberNet.jabber.protocol.stream;
 
-using jabber.protocol.stream;
-
-namespace jabber.connection.sasl
+namespace JabberNet.jabber.connection.sasl
 {
     //FF
 	public class AnonymousProcessor : SASLProcessor

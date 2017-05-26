@@ -9,20 +9,16 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
 using System.Xml;
 
-using bedrock.util;
-
-namespace jabber.protocol.iq
+namespace JabberNet.jabber.protocol.iq
 {
     /// <summary>
     /// IQ packet with a roster query element inside.
     /// </summary>
-    [SVN(@"$Id$")]
     public class RosterIQ : jabber.protocol.client.TypedIQ<Roster>
     {
         /// <summary>
@@ -37,7 +33,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// A roster query element.
     /// </summary>
-    [SVN(@"$Id$")]
     public class Roster : Element
     {
         /// <summary>
@@ -81,7 +76,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// The current status of the subscription related to this item.
     /// </summary>
-    [SVN(@"$Id$")]
     public enum Subscription
     {
         /// <summary>
@@ -113,7 +107,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// An optional attribute specifying the current status of a request to this contact.
     /// </summary>
-    [SVN(@"$Id$")]
     public enum Ask
     {
         /// <summary>
@@ -133,7 +126,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// Roster items.
     /// </summary>
-    [SVN(@"$Id$")]
     public class Item : Element
     {
         /// <summary>
@@ -266,7 +258,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// Roster item groups.  &lt;group&gt;GroupName&lt;/group&gt;
     /// </summary>
-    [SVN(@"$Id$")]
     public class Group : Element
     {
         /// <summary>

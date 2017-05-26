@@ -9,21 +9,17 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
+
 using System;
 using System.Xml;
 
-using bedrock.util;
-using jabber;
-using jabber.protocol;
-
-namespace jabber.protocol.iq
+namespace JabberNet.jabber.protocol.iq
 {
     /// <summary>
     /// Publish/Subscribe.  See XEP-60: http://www.xmpp.org/extensions/xep-0060.html
     /// </summary>
-    [SVN(@"$Id$")]
     public class PubSubEvent : Element
     {
         /// <summary>
@@ -58,7 +54,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// Notification for item deletion.
     /// </summary>
-    [SVN(@"$Id$")]
     public class EventRetract : Element
     {
         /// <summary>
@@ -92,9 +87,8 @@ namespace jabber.protocol.iq
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
-    [SVN(@"$Id$")]
     public class EventCollection : PubSubCommand
     {
         /// <summary>
@@ -146,7 +140,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// Nodes added to a collection
     /// </summary>
-    [SVN(@"$Id$")]
     public class EventAssociate : Element
     {
         /// <summary>
@@ -191,7 +184,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// Nodes removed from a collection
     /// </summary>
-    [SVN(@"$Id$")]
     public class EventDisassociate : Element
     {
         /// <summary>
@@ -227,7 +219,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// Pubsub items notification.  This is the main reason for XEP-60 to have been written.
     /// </summary>
-    [SVN(@"$Id$")]
     public class EventItems : PubSubCommand
     {
         /// <summary>
@@ -310,7 +301,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// New node configuration
     /// </summary>
-    [SVN(@"$Id$")]
     public class EventConfiguration : PubSubCommand
     {
         /// <summary>
@@ -354,7 +344,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// All of the items in a node have been deleted.
     /// </summary>
-    [SVN(@"$Id$")]
     public class EventPurge : PubSubCommand
     {
         /// <summary>
@@ -389,7 +378,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// Subscription state has changed
     /// </summary>
-    [SVN(@"$Id$")]
     public class EventSubscription : PubSubCommand
     {
         /// <summary>

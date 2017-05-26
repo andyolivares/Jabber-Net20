@@ -9,21 +9,18 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
+using System;
 using System.Xml;
 
-using bedrock.util;
-
-namespace jabber.protocol.x
+namespace JabberNet.jabber.protocol.x
 {
     /// <summary>
     /// Types of events
     /// </summary>
     [Flags]
-    [SVN(@"$Id$")]
     public enum EventType
     {
         /// <summary>
@@ -60,7 +57,6 @@ namespace jabber.protocol.x
     /// <summary>
     /// A event x element, described by XEP-0022.
     /// </summary>
-    [SVN(@"$Id$")]
     public class Event : Element
     {
         /// <summary>

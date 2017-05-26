@@ -9,17 +9,17 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
+
 using System;
 using System.Collections;
-using System.Xml;
 using System.Text;
+using System.Xml;
+using JabberNet.jabber.protocol.stream;
+using EnumsNET;
 
-using bedrock.util;
-using jabber.protocol.stream;
-
-namespace jabber.connection.sasl
+namespace JabberNet.jabber.connection.sasl
 {
     /// <summary>
     /// A SASL processor instance has been created.  Fill it with information, like USERNAME and PASSWORD.
@@ -29,7 +29,6 @@ namespace jabber.connection.sasl
     /// <summary>
     /// Some sort of SASL error
     /// </summary>
-    [SVN(@"$Id: SASLProcessor.cs 724 2008-08-06 18:09:25Z hildjj $")]
     public class SASLException : ApplicationException
     {
         /// <summary>
@@ -47,7 +46,6 @@ namespace jabber.connection.sasl
     /// <summary>
     /// Authentication failed.
     /// </summary>
-    [SVN(@"$Id: SASLProcessor.cs 724 2008-08-06 18:09:25Z hildjj $")]
     public class AuthenticationFailedException : SASLException
     {
         /// <summary>
@@ -67,7 +65,6 @@ namespace jabber.connection.sasl
     /// <summary>
     /// A required directive wasn't supplied.
     /// </summary>
-    [SVN(@"$Id: SASLProcessor.cs 724 2008-08-06 18:09:25Z hildjj $")]
     public class MissingDirectiveException : SASLException
     {
         /// <summary>
@@ -81,7 +78,6 @@ namespace jabber.connection.sasl
     /// <summary>
     /// Server sent an invalid challenge
     /// </summary>
-    [SVN(@"$Id: SASLProcessor.cs 724 2008-08-06 18:09:25Z hildjj $")]
     public class InvalidServerChallengeException : SASLException
     {
         /// <summary>
@@ -94,7 +90,6 @@ namespace jabber.connection.sasl
     /// <summary>
     /// Summary description for SASLProcessor.
     /// </summary>
-    [SVN(@"$Id: SASLProcessor.cs 724 2008-08-06 18:09:25Z hildjj $")]
     public abstract class SASLProcessor
     {
         /// <summary>
@@ -113,32 +108,33 @@ namespace jabber.connection.sasl
         private Hashtable m_directives = new Hashtable();
 
         /// <summary>
-        ///
-        /// </summary>
-        public SASLProcessor()
-        {
-        }
-
-        /// <summary>
         /// Create a new SASLProcessor, of the best type possible
         /// </summary>
+        /// <param name="mechs">The mechanisms supported by the server</param>
         /// <param name="mt">The types the server implements</param>
         /// <param name="plaintextOK">Is it ok to select insecure types?</param>
-        /// <param name="mechs">The mechanisms supported by the server</param>
+        /// <param name="useClientCertificate">
+        /// <c>true</c> if the connection have an associated local client certificate.
+        /// </param>
+        /// <param name="useAnonymous"></param>
         /// <returns></returns>
-        public static SASLProcessor createProcessor(MechanismType mt, bool plaintextOK, Mechanisms mechs, bool useAnonymous)
+        public static SASLProcessor createProcessor(
+            Mechanisms mechs,
+            MechanismType mt,
+            bool plaintextOK,
+            bool useClientCertificate,
+            bool useAnonymous)
         {
-            //FF
             if (useAnonymous && (mt & MechanismType.ANONYMOUS) == MechanismType.ANONYMOUS)
             {
                 return new AnonymousProcessor();
             }
 
-            if ((mt & MechanismType.EXTERNAL) == MechanismType.EXTERNAL)
+            if (mt.HasAllFlags(MechanismType.EXTERNAL) && useClientCertificate)
             {
                 return new ExternalProcessor();
             }
-            if ((mt & MechanismType.GSSAPI) == MechanismType.GSSAPI)
+            else if ((mt & MechanismType.GSSAPI) == MechanismType.GSSAPI)
             {
                 string RemotePrincipal = "";
                 foreach (Mechanism mechanism in mechs.GetMechanisms())

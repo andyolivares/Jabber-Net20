@@ -9,25 +9,20 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
+
 using System;
-
-using System.ComponentModel;
-using System.ComponentModel.Design;
 using System.Collections;
-using gen = System.Collections.Generic;
 using System.Diagnostics;
+using JabberNet.bedrock.collections;
+using JabberNet.jabber.connection;
+using JabberNet.jabber.protocol.client;
+using JabberNet.jabber.protocol.iq;
+using JabberNet.jabber.protocol.x;
+using gen = System.Collections.Generic;
 
-using bedrock.util;
-using bedrock.collections;
-
-using jabber.protocol.client;
-using jabber.protocol.x;
-using jabber.protocol.iq;
-using jabber.connection;
-
-namespace jabber.client
+namespace JabberNet.jabber.client
 {
 
     /// <summary>
@@ -40,35 +35,16 @@ namespace jabber.client
     /// <summary>
     /// Specifies the presence proxy database.
     /// </summary>
-    [SVN(@"$Id$")]
     public class PresenceManager : jabber.connection.StreamComponent, IEnumerable
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-#pragma warning disable 0414
-        private System.ComponentModel.Container components = null;
-#pragma warning restore 0414
- 
         private Tree m_items = new Tree();
         private CapsManager m_caps = null;
-
-        /// <summary>
-        /// Constructs a PresenceManager object and adds it to a container.
-        /// </summary>
-        /// <param name="container">Parent container.</param>
-        public PresenceManager(System.ComponentModel.IContainer container) : this()
-        {
-            container.Add(this);
-        }
 
         /// <summary>
         /// Constructs a new PresenceManager object.
         /// </summary>
         public PresenceManager()
         {
-            InitializeComponent();
-
             this.OnStreamChanged += new bedrock.ObjectHandler(PresenceManager_OnStreamChanged);
         }
 
@@ -85,11 +61,7 @@ namespace jabber.client
         /// <summary>
         /// Gets or sets the JabberClient associated with the Presence Manager.
         /// </summary>
-        [Description("Gets or sets the JabberClient associated with the Presence Manager.")]
-        [Category("Jabber")]
-        [Browsable(false)]
         [Obsolete("Use the Stream property instead")]
-        [ReadOnly(true)]
         public JabberClient Client
         {
             get { return (JabberClient)this.Stream; }
@@ -99,17 +71,10 @@ namespace jabber.client
         /// <summary>
         /// The CapsManager for this view
         /// </summary>
-        [Category("Jabber")]
         public CapsManager CapsManager
         {
             get
             {
-                // If we are running in the designer, let's try to auto-hook a CapsManager
-                if ((m_caps == null) && DesignMode)
-                {
-                    IDesignerHost host = (IDesignerHost)base.GetService(typeof(IDesignerHost));
-                    this.CapsManager = (CapsManager)jabber.connection.StreamComponent.GetComponentFromHost(host, typeof(CapsManager));
-                }
                 return m_caps;
             }
             set
@@ -227,10 +192,10 @@ namespace jabber.client
         }
 
         /// <summary>
-        /// Get the features associated with the JID.  If a bare JID is passed in, this will be 
+        /// Get the features associated with the JID.  If a bare JID is passed in, this will be
         /// a union of all of the features for all of the resources of this user.  Otherwise,
         /// it will be the features for the given resource.
-        /// 
+        ///
         /// Requires a CapsManager to be set before use.
         /// </summary>
         /// <param name="jid"></param>
@@ -253,7 +218,7 @@ namespace jabber.client
         /// Does the given JID implement the given feature?  Bare JID asks if any
         /// resource of that user implements that feature.  Full JID asks if the
         /// given resource implements that feature.
-        /// 
+        ///
         /// Requires a CapsManager to be set before use.
         /// </summary>
         /// <param name="jid"></param>
@@ -272,7 +237,7 @@ namespace jabber.client
         /// most routines in PresenceManager, may also return JIDs that have negative
         /// presence.  If a full JID is specified, this is effectively the same as
         /// HasFeature, but null will be returned if the feature isn't implemented.
-        /// 
+        ///
         /// </summary>
         /// <param name="jid"></param>
         /// <param name="featureURI"></param>
@@ -307,18 +272,6 @@ namespace jabber.client
                 return new Presence[0];
             return upm.GetAll();
         }
-
-
-        #region Component Designer generated code
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            components = new System.ComponentModel.Container();
-        }
-        #endregion
 
         /// <summary>
         /// Iterate over all of the JIDs we have not-unavilable presence from.

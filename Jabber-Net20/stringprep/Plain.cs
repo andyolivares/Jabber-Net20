@@ -9,13 +9,12 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
-using stringprep.steps;
+using JabberNet.stringprep.steps;
 
-namespace stringprep
+namespace JabberNet.stringprep
 {
     /// <summary>
     /// A relatively plain stringprep profile, that doesn't do case folding, or prevent unassigned characters.

@@ -9,24 +9,18 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
+
 using System;
-using System.Collections.Generic;
-using System.Text;
-
-using System.Net;
 using System.IO;
-using System.Collections;
+using System.Net;
 
-using bedrock.util;
-
-namespace jabber.connection
+namespace JabberNet.jabber.connection
 {
     /// <summary>
     /// Manages HTTP Requests via XMPP (XEP-70).
     /// </summary>
-    [SVN(@"$Id$")]
     public class HttpUploader
     {
         /// <summary>

@@ -9,20 +9,16 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
 using System.Xml;
 
-using bedrock.util;
-
-namespace jabber.protocol.accept
+namespace JabberNet.jabber.protocol.accept
 {
     /// <summary>
     /// The type field in a route tag.
     /// </summary>
-    [SVN(@"$Id$")]
     public enum RouteType
     {
         /// <summary>
@@ -46,7 +42,6 @@ namespace jabber.protocol.accept
     /// <summary>
     /// The route packet.
     /// </summary>
-    [SVN(@"$Id$")]
     public class Route : jabber.protocol.Packet
     {
         /// <summary>

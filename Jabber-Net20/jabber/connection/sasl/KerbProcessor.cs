@@ -9,24 +9,22 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
+
 using System;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Xml;
-using jabber.protocol.stream;
+using JabberNet.jabber.protocol.stream;
 using HANDLE = System.IntPtr;
 
-using bedrock.util;
-
-namespace jabber.connection.sasl
+namespace JabberNet.jabber.connection.sasl
 {
 
     ///<summary>
     /// Uses Kerberos authentication ot log into XMPP server.
     ///</summary>
-    [SVN(@"$Id$")]
     public class KerbProcessor : SASLProcessor
     {
         /// <summary>

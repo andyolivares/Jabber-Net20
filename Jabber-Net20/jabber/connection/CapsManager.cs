@@ -9,32 +9,26 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
+
 using System;
-using System.Collections;
-using System.ComponentModel;
-using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
+using JabberNet.bedrock.util;
+using JabberNet.jabber.protocol;
+using JabberNet.jabber.protocol.client;
+using JabberNet.jabber.protocol.iq;
+using JabberNet.jabber.protocol.x;
 
-using jabber.protocol;
-using jabber.protocol.client;
-using jabber.protocol.iq;
-using jabber.protocol.x;
-
-using bedrock.util;
-using bedrock.io;
-
-namespace jabber.connection
+namespace JabberNet.jabber.connection
 {
     /// <summary>
     /// Manages the entity capabilities information for the local connection as well as remote ones.
     /// See XEP-0115, version 1.5 for details.
     /// </summary>
-    [SVN("$Id$")]
     public class CapsManager: StreamComponent
     {
         /// <summary>
@@ -42,11 +36,6 @@ namespace jabber.connection
         /// </summary>
         public const string DEFAULT_HASH = "sha-1";
         private const string SEP = "<";
-
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
 
         private DiscoNode m_disco;
         private string m_hash = DEFAULT_HASH;
@@ -63,22 +52,12 @@ namespace jabber.connection
         }
 
         /// <summary>
-        /// Creates a new capability manager and associates it with a container.
-        /// </summary>
-        /// <param name="container">Parent container.</param>
-        public CapsManager(IContainer container) : this((DiscoNode)null)
-        {
-            container.Add(this);
-        }
-
-        /// <summary>
         /// Create a CapsManager from an existing Disco Node.  Pass in null
         /// to use a placeholder.
         /// </summary>
         /// <param name="node"></param>
         public CapsManager(DiscoNode node)
         {
-            InitializeComponent();
             this.OnStreamChanged += new bedrock.ObjectHandler(CapsManager_OnStreamChanged);
 
             if (node == null)
@@ -88,34 +67,12 @@ namespace jabber.connection
         }
 
         /// <summary>
-        /// Performs tasks associated with freeing, releasing, or resetting resources.
-        /// </summary>
-        /// <param name="disposing">
-        /// True if managed resources should be disposed; otherwise, false.
-        /// </param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        /// <summary>
         /// The RosterManager for this view
         /// </summary>
-        [Category("Cache")]
         public DiscoManager DiscoManager
         {
             get
             {
-                // If we are running in the designer, let's try to auto-hook a RosterManager
-                if ((m_discoManager == null) && DesignMode)
-                {
-                    IDesignerHost host = (IDesignerHost)base.GetService(typeof(IDesignerHost));
-                    this.DiscoManager = (DiscoManager)jabber.connection.StreamComponent.GetComponentFromHost(host, typeof(DiscoManager));
-                }
                 return m_discoManager;
             }
             set
@@ -130,7 +87,6 @@ namespace jabber.connection
         /// The file to store a cache of all received caps into.  If no cache file is supplied,
         /// caps queries will not be generated.
         /// </summary>
-        [Category("Cache")]
         public string FileName
         {
             get
@@ -176,8 +132,6 @@ namespace jabber.connection
         /// <summary>
         /// Gets or sets the current features enabled by this entity.
         /// </summary>
-        [Category("Capabilities")]
-        [DefaultValue(null)]
         public string[] Features
         {
             get
@@ -219,8 +173,6 @@ namespace jabber.connection
         /// <summary>
         /// Gets or sets the hash algorithm to use.
         /// </summary>
-        [Category("Capabilities")]
-        [DefaultValue(DEFAULT_HASH)]
         public string Hash
         {
             get { return m_hash; }
@@ -265,18 +217,18 @@ namespace jabber.connection
                 S.Append(SEP);
             }
 
-            // 6. If the service discovery information response includes XEP-0128 data forms, 
-            // sort the forms by the FORM_TYPE (i.e., by the XML character 
+            // 6. If the service discovery information response includes XEP-0128 data forms,
+            // sort the forms by the FORM_TYPE (i.e., by the XML character
             // data of the <value/> element).
             Data[] ext = n.Extensions;
             if (ext != null)
             {
                 Array.Sort(ext, new FormTypeComparer());
-                foreach (Data x in ext)  
+                foreach (Data x in ext)
                 {
                     // For each extended service discovery information form:
 
-                    // 1. Append the XML character data of the FORM_TYPE field's <value/> 
+                    // 1. Append the XML character data of the FORM_TYPE field's <value/>
                     // element, followed by the '<' character.
                     S.Append(x.FormType);
                     S.Append(SEP);
@@ -326,7 +278,6 @@ namespace jabber.connection
         /// <summary>
         /// Returns the calculated hash over all of the caps information.
         /// </summary>
-        [Category("Capabilities")]
         public string Ver
         {
             get
@@ -340,8 +291,6 @@ namespace jabber.connection
         /// <summary>
         /// Gets or sets the node URI for this client.
         /// </summary>
-        [Category("Capabilities")]
-        [DefaultValue(null)]
         public string Node
         {
             get { return m_disco.Node; }
@@ -351,7 +300,6 @@ namespace jabber.connection
         /// <summary>
         /// Retrieves the node#ver to look for in queries.
         /// </summary>
-        [Category("Capabilities")]
         public string NodeVer
         {
             get { return Node + "#" + Ver; }
@@ -383,8 +331,6 @@ namespace jabber.connection
         /// <summary>
         /// Gets or sets all of the identities currently supported by this manager.
         /// </summary>
-        [Category("Capabilities")]
-        [DefaultValue(null)]
         public Ident[] Identities
         {
             get
@@ -423,7 +369,7 @@ namespace jabber.connection
             Caps c = pres["c", URI.CAPS] as Caps;
             if (c == null)
                 return;
-            
+
             // TODO: ignoring old-style caps for now.
             if (!c.NewStyle)
                 return;
@@ -459,9 +405,9 @@ namespace jabber.connection
         }
 
         /// <summary>
-        /// Get a DiscoNode that has all of the info associated with the 
+        /// Get a DiscoNode that has all of the info associated with the
         /// given ver hash, or null if there is none cached.
-        /// 
+        ///
         /// </summary>
         /// <param name="ver"></param>
         /// <returns></returns>
@@ -556,18 +502,5 @@ namespace jabber.connection
             Debug.Assert(Node != null, "Node is required");
             pres.AppendChild(GetCaps(pres.OwnerDocument));
         }
-
-        #region Component Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            components = new System.ComponentModel.Container();
-        }
-
-        #endregion
     }
 }

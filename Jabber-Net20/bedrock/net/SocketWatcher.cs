@@ -9,27 +9,20 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
+
 using System;
-
-using System.Collections;
-using System.Diagnostics;
-using System.IO;
-
-using bedrock.util;
-using bedrock.collections;
-
 using System.Security.Cryptography.X509Certificates;
+using JabberNet.bedrock.collections;
 
-namespace bedrock.net
+namespace JabberNet.bedrock.net
 {
     /// <summary>
     /// A collection of sockets.  This makes a lot more sense in the poll() version (Unix/C) since
     /// you need to have a place to collect all of the sockets and call poll().  Here, it's just
     /// convenience functions.
     /// </summary>
-    [SVN(@"$Id$")]
     public class SocketWatcher : IDisposable
     {
         private enum State

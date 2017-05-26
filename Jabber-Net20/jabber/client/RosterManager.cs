@@ -9,22 +9,17 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
+
 using System;
-
-using System.ComponentModel;
-using System.ComponentModel.Design;
 using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
+using JabberNet.jabber.protocol.client;
+using JabberNet.jabber.protocol.iq;
 
-using bedrock.collections;
-using bedrock.util;
-
-using jabber.protocol.client;
-using jabber.protocol.iq;
-
-namespace jabber.client
+namespace JabberNet.jabber.client
 {
     /// <summary>
     /// Informs the client of roster items.
@@ -75,28 +70,11 @@ namespace jabber.client
     /// <summary>
     /// Manages the roster of the client.
     /// </summary>
-    [SVN(@"$Id$")]
-    public class RosterManager : jabber.connection.StreamComponent, IEnumerable
+    public class RosterManager : jabber.connection.StreamComponent, IEnumerable<JID>
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-#pragma warning disable 0414
-        private System.ComponentModel.Container components = null;
-#pragma warning restore 0414
-        private Tree m_items = new Tree();
+        private Dictionary<JID,Item> m_items = new Dictionary<JID,Item>();
         private AutoSubscriptionHanding m_autoAllow = AutoSubscriptionHanding.NONE;
         private bool m_autoSubscribe = false;
-
-        /// <summary>
-        /// Creates a new roster manager inside a container.
-        /// </summary>
-        /// <param name="container">Parent container</param>
-        public RosterManager(System.ComponentModel.IContainer container) : this()
-        {
-            // Required for Windows.Forms Class Composition Designer support
-            container.Add(this);
-        }
 
         /// <summary>
         /// Creates a new roster manager.
@@ -104,7 +82,6 @@ namespace jabber.client
         public RosterManager()
         {
             // Required for Windows.Forms Class Composition Designer support
-            InitializeComponent();
             this.OnStreamChanged += new bedrock.ObjectHandler(RosterManager_OnStreamChanged);
         }
 
@@ -122,11 +99,7 @@ namespace jabber.client
         /// <summary>
         /// Gets or sets the Jabber client associated with the Roster Manager.
         /// </summary>
-        [Description("The JabberClient to hook up to.")]
-        [Category("Jabber")]
-        [Browsable(false)]
         [Obsolete("Use the Stream property instead")]
-        [ReadOnly(true)]
         public JabberClient Client
         {
             get { return (JabberClient) this.Stream; }
@@ -136,9 +109,6 @@ namespace jabber.client
         /// <summary>
         /// Gets the AutoSubscription Handling value for inbound subscriptions.
         /// </summary>
-        [Description("How to handle inbound subscriptions")]
-        [Category("Jabber")]
-        [DefaultValue(AutoSubscriptionHanding.NONE)]
         public AutoSubscriptionHanding AutoAllow
         {
             get { return m_autoAllow; }
@@ -148,9 +118,6 @@ namespace jabber.client
         /// <summary>
         /// Determines whether auto-subscribe is enabled or disabled for a user.
         /// </summary>
-        [Description("Should we subscribe to a user whenever we allow a subscription from them?")]
-        [Category("Jabber")]
-        [DefaultValue(false)]
         public bool AutoSubscribe
         {
             get { return m_autoSubscribe; }
@@ -160,30 +127,22 @@ namespace jabber.client
         /// <summary>
         /// Informs the client that is has new roster items.
         /// </summary>
-        [Description("Convenience event for new roster items.")]
-        [Category("Jabber")]
         public event RosterItemHandler OnRosterItem;
 
         /// <summary>
         /// Informs the client when a roster result starts, before any OnRosterItem events fire.
         /// This will not fire for type='set'.
         /// </summary>
-        [Description("Roster result about to start being processed.")]
-        [Category("Jabber")]
         public event bedrock.ObjectHandler OnRosterBegin;
 
         /// <summary>
         /// Informs the client that the roster has been retrieved from the XMPP server.
         /// </summary>
-        [Description("Roster result finished being processed.")]
-        [Category("Jabber")]
         public event bedrock.ObjectHandler OnRosterEnd;
 
         /// <summary>
         /// Informs the client that a subscription request was received that cannot be auto-handled.
         /// </summary>
-        [Description("Subscription request received that cannot be auto-handled")]
-        [Category("Jabber")]
         public event SubscriptionHandler OnSubscription;
 
         /// <summary>
@@ -191,8 +150,6 @@ namespace jabber.client
         /// user. By default, the user will be removed from the roster after this event
         /// fires. To prevent this, you need to set the remove property to false.
         /// </summary>
-        [Description("Unsubscribe/Unsubscribed notification from other user")]
-        [Category("Jabber")]
         public event UnsubscriptionHandler OnUnsubscription;
 
         /// <summary>
@@ -211,7 +168,7 @@ namespace jabber.client
             get
             {
                 lock (this)
-                    return (Item) m_items[jid];
+                    return m_items.ContainsKey(jid) ? m_items[jid] : null;
             }
         }
 
@@ -288,7 +245,7 @@ namespace jabber.client
                 Presence sub_ack = new Presence(m_stream.Document);
                 sub_ack.To = pres.From;
                 sub_ack.Type = PresenceType.subscribe;
-                Write(sub_ack);                
+                Write(sub_ack);
                 break;
             case PresenceType.unsubscribe:
                 // ack.  we'll likely get an unsubscribed soon, anyway.
@@ -339,7 +296,7 @@ namespace jabber.client
                     }
                     else
                     {
-                        if (m_items.Contains(i.JID))
+                        if (m_items.ContainsKey(i.JID))
                             m_items.Remove(i.JID);
                         m_items[i.JID] = i;
                     }
@@ -423,24 +380,21 @@ C: <iq from='juliet@example.com/balcony' type='set' id='delete_1'>
             RosterIQ iq = new RosterIQ(m_stream.Document);
             iq.Type = IQType.set;
             Roster r = iq.Instruction;
-            r.AppendChild(item);
+            if (item.OwnerDocument != m_stream.Document)
+                r.AppendChild(item.CloneNode(true, m_stream.Document));
+            else
+                r.AppendChild(item);
             Write(iq);  // ignore response
         }
-
-        #region Component Designer generated code
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            components = new System.ComponentModel.Container();
-        }
-        #endregion
 
         #region IEnumerable Members
 
         IEnumerator IEnumerable.GetEnumerator()
+        {
+            return m_items.Keys.GetEnumerator();
+        }
+
+        IEnumerator<JID> IEnumerable<JID>.GetEnumerator()
         {
             return m_items.Keys.GetEnumerator();
         }

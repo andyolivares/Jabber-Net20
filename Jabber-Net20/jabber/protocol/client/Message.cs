@@ -9,20 +9,17 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
+using System;
 using System.Xml;
 
-using bedrock.util;
-
-namespace jabber.protocol.client
+namespace JabberNet.jabber.protocol.client
 {
     /// <summary>
     /// Message type attribute
     /// </summary>
-    [SVN(@"$Id$")]
     public enum MessageType
     {
         /// <summary>
@@ -51,7 +48,6 @@ namespace jabber.protocol.client
     /// TODO: Some XHTML is supported by setting the .Html property,
     /// but extra xmlns="" get put everywhere at the moment.
     /// </summary>
-    [SVN(@"$Id$")]
     public class Message : Packet
     {
         /// <summary>
@@ -109,10 +105,10 @@ namespace jabber.protocol.client
                 // Thanks, Mr. Postel.
                 XmlElement h = this["html"];
                 if (h == null)
-                    return "";
+                    return null;
                 XmlElement b = h["body"];
                 if (b == null)
-                    return "";
+                    return null;
                 string xml = b.InnerXml;
                 // HACK: yeah, yeah, I know.
                 return xml.Replace(" xmlns=\"" + URI.XHTML + "\"", "");

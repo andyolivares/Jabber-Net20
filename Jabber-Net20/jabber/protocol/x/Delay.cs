@@ -9,20 +9,17 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
+using System;
 using System.Xml;
 
-using bedrock.util;
-
-namespace jabber.protocol.x
+namespace JabberNet.jabber.protocol.x
 {
     /// <summary>
     /// A delay x element.
     /// </summary>
-    [SVN(@"$Id$")]
     public class Delay : Element
     {
         /// <summary>
@@ -75,7 +72,6 @@ namespace jabber.protocol.x
     /// <summary>
     /// A modern, XEP-0203 delay element
     /// </summary>
-    [SVN(@"$Id$")]
     public class ModernDelay : Element
     {
 /*
@@ -129,6 +125,6 @@ namespace jabber.protocol.x
         {
             get { return this.InnerText; }
             set { this.InnerText = value; }
-        } 
+        }
     }
 }

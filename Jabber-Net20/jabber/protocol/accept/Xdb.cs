@@ -9,20 +9,16 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
 using System.Xml;
 
-using bedrock.util;
-
-namespace jabber.protocol.accept
+namespace JabberNet.jabber.protocol.accept
 {
     /// <summary>
     /// The type attribute
     /// </summary>
-    [SVN(@"$Id$")]
     public enum XdbType
     {
         /// <summary>
@@ -50,7 +46,6 @@ namespace jabber.protocol.accept
     /// <summary>
     /// The action attribute.
     /// </summary>
-    [SVN(@"$Id$")]
     public enum XdbAction
     {
         /// <summary>
@@ -70,7 +65,6 @@ namespace jabber.protocol.accept
     /// <summary>
     /// The XDB packet.
     /// </summary>
-    [SVN(@"$Id$")]
     public class Xdb : jabber.protocol.Packet
     {
         /// <summary>

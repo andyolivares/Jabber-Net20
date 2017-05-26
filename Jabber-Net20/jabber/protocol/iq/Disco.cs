@@ -9,16 +9,14 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
+
 using System.Xml;
+using JabberNet.bedrock.collections;
+using JabberNet.jabber.protocol.x;
 
-using bedrock.util;
-using jabber.protocol.x;
-using bedrock.collections;
-
-namespace jabber.protocol.iq
+namespace JabberNet.jabber.protocol.iq
 {
     /*
      * <iq
@@ -38,7 +36,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// IQ packet with a disco#items query element inside.
     /// </summary>
-    [SVN(@"$Id$")]
     public class DiscoItemsIQ : jabber.protocol.client.TypedIQ<DiscoItems>
     {
         /// <summary>
@@ -62,7 +59,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// IQ packet with a disco#info query element inside.
     /// </summary>
-    [SVN(@"$Id$")]
     public class DiscoInfoIQ : jabber.protocol.client.TypedIQ<DiscoInfo>
     {
         /// <summary>
@@ -98,7 +94,7 @@ namespace jabber.protocol.iq
      *         category='directory'
      *         type='room'
      *         name='Play-Specific Chatrooms'/>
-     * 
+     *
      *     <feature var='gc-1.0'/>
      *     <feature var='http://jabber.org/protocol/muc'/>
      *     <feature var='jabber:iq:register'/>
@@ -114,7 +110,6 @@ namespace jabber.protocol.iq
     /// A disco#items query element.
     /// See <a href="http://www.xmpp.org/extensions/xep-0030.html">XEP-0030</a> for more information.
     /// </summary>
-    [SVN(@"$Id$")]
     public class DiscoItems : Element
     {
         /// <summary>
@@ -167,7 +162,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// Actions for iq/set in the disco#items namespace.
     /// </summary>
-    [SVN(@"$Id$")]
     public enum DiscoAction
     {
         /// <summary>
@@ -187,7 +181,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// An item inside a disco#items result.
     /// </summary>
-    [SVN(@"$Id$")]
     public class DiscoItem : Element
     {
         /// <summary>
@@ -280,7 +273,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// The information associated with a disco node.
     /// </summary>
-    [SVN(@"$Id$")]
     public class DiscoInfo : Element
     {
         private StringSet m_features = null;
@@ -381,7 +373,7 @@ namespace jabber.protocol.iq
         }
 
         /// <summary>
-        /// Clear all of the features from the 
+        /// Clear all of the features from the
         /// </summary>
         public void ClearFeatures()
         {
@@ -437,7 +429,7 @@ namespace jabber.protocol.iq
 
         /// <summary>
         /// In the unlikely event that there are multiple extensions, we need to be able
-        /// to retrieve all of them.  
+        /// to retrieve all of them.
         /// </summary>
         /// <returns></returns>
         public Data[] GetExtensions()
@@ -464,7 +456,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// The identitiy associated with a disco node.
     /// </summary>
-    [SVN(@"$Id$")]
     public class DiscoIdentity : Element
     {
         /// <summary>
@@ -518,7 +509,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// A feature associated with a disco node.
     /// </summary>
-    [SVN(@"$Id$")]
     public class DiscoFeature : Element
     {
         /// <summary>

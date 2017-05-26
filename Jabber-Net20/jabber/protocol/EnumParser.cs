@@ -9,24 +9,21 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
+
 using System;
 using System.Collections.Generic;
-using System.Threading;
-using System.Reflection;
 using System.Diagnostics;
+using System.Reflection;
 
-using bedrock.util;
-
-namespace jabber.protocol
+namespace JabberNet.jabber.protocol
 {
     /// <summary>
     /// How should the marked-up entity be rendered in XML?  Only used
     /// for enums that are going to be put in attributes at the moment.
     /// TODO: support namespaces, use for element definitions.
     /// </summary>
-    [SVN(@"$Id$")]
     [AttributeUsage(AttributeTargets.Field)]
     public class XMLAttribute : Attribute
     {
@@ -53,10 +50,9 @@ namespace jabber.protocol
     /// <summary>
     /// Parse enums
     /// </summary>
-    [SVN(@"$Id$")]
     public class EnumParser
 	{
-        private static Dictionary<Type, Dictionary<string, object>> s_vals = 
+        private static Dictionary<Type, Dictionary<string, object>> s_vals =
             new Dictionary<Type, Dictionary<string, object>>();
 
         private static Dictionary<Type, Dictionary<object, string>> s_strings =
@@ -145,7 +141,7 @@ namespace jabber.protocol
         }
 
         /// <summary>
-        /// Parse a string into an enum value for the given type T.  
+        /// Parse a string into an enum value for the given type T.
         /// Any errors map to -1.
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -164,7 +160,7 @@ namespace jabber.protocol
         }
 
         /// <summary>
-        /// Parse a string into an enum value for the given type.  
+        /// Parse a string into an enum value for the given type.
         /// Any errors map to -1.
         /// </summary>
         /// <param name="value"></param>

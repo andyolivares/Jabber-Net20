@@ -9,18 +9,17 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
+
 using System;
 
-using bedrock.util;
-namespace bedrock.collections
+namespace JabberNet.bedrock.collections
 {
     /// <summary>
     /// A type-safe stack for bytes, implemented as a growable
     /// buffer.
     /// </summary>
-    [SVN(@"$Id$")]
     public class ByteStack
     {
         private const double GROWTH_FACTOR = 1.5d;

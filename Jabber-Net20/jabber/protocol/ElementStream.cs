@@ -9,21 +9,13 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
-using System.Collections;
-using System.Diagnostics;
-using System.IO;
-using System.Threading;
+using System;
 using System.Xml;
 
-using bedrock.io;
-using bedrock.util;
-using jabber.protocol;
-
-namespace jabber.protocol
+namespace JabberNet.jabber.protocol
 {
     /// <summary>
     /// A packet was received.  The specified element will likely be a sub-class
@@ -38,7 +30,6 @@ namespace jabber.protocol
     ///
     /// TODO: Combine with AsyncElementStream, since there's only one impl.
     /// </summary>
-    [SVN(@"$Id$")]
     public class ElementStream
     {
         /// <summary>

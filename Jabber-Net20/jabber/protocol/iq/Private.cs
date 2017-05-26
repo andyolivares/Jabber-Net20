@@ -9,21 +9,17 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
-using System.Diagnostics;
+
 using System.Xml;
 
-using bedrock.util;
-
-namespace jabber.protocol.iq
+namespace JabberNet.jabber.protocol.iq
 {
     /// <summary>
     /// Private storage IQ.
     /// See XEP-0049 (http://www.xmpp.org/extensions/xep-0049.html)
     /// </summary>
-    [SVN(@"$Id$")]
     public class PrivateIQ : jabber.protocol.client.TypedIQ<Private>
     {
         /// <summary>
@@ -40,14 +36,13 @@ namespace jabber.protocol.iq
     /// Private storage query.
     /// See XEP-0049 (http://www.xmpp.org/extensions/xep-0049.html)
     /// </summary>
-    [SVN(@"$Id$")]
     public class Private : Element
     {
         /// <summary>
         /// Create for outbound
         /// </summary>
         /// <param name="doc"></param>
-        public Private(XmlDocument doc) : 
+        public Private(XmlDocument doc) :
             base("query", URI.PRIVATE, doc)
         {
         }

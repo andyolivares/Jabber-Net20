@@ -9,19 +9,14 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
-using bedrock.util;
-using jabber.protocol;
-
-namespace jabber.protocol.client
+namespace JabberNet.jabber.protocol.client
 {
     /// <summary>
     /// ElementFactory for the jabber:client namespace.
     /// </summary>
-    [SVN(@"$Id$")]
     public class Factory : IPacketTypes
     {
         private static QnameType[] s_qnt = new QnameType[]

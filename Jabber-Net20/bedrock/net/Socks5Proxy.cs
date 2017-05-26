@@ -9,20 +9,18 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
+using System;
 using System.Diagnostics;
 using System.Text;
-using bedrock.util;
 
-namespace bedrock.net
+namespace JabberNet.bedrock.net
 {
     /// <summary>
     /// Proxy object for sockets that want to do SOCKS proxying.
     /// </summary>
-    [SVN(@"$Id$")]
     public class Socks5Proxy : ProxySocket
     {
         private enum States { None, Connecting, GettingMethods, WaitingForAuth, RequestingProxy, Running, Closed }

@@ -9,23 +9,21 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
+
 using System;
 using System.Diagnostics;
 using System.Text;
 using System.Xml;
+using JabberNet.bedrock.net;
+using JabberNet.jabber.protocol;
 
-using bedrock.net;
-using bedrock.util;
-using jabber.protocol;
-
-namespace jabber.connection
+namespace JabberNet.jabber.connection
 {
     /// <summary>
     /// Specifies the connection type, such as socket, polling, and so on.
     /// </summary>
-    [SVN(@"$Id$")]
     public enum ConnectionType
     {
         /// <summary>
@@ -45,7 +43,6 @@ namespace jabber.connection
     /// <summary>
     /// Listens for stanza and connection events
     /// </summary>
-    [SVN(@"$Id$")]
     public interface IStanzaEventListener
     {
         /// <summary>
@@ -58,11 +55,6 @@ namespace jabber.connection
             get;
             set;
         }
-
-        /// <summary>
-        /// Notifies the user that one of the properties has changed.
-        /// </summary>
-        event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// Informs the client that the connection to the XMPP server has finished.
@@ -150,7 +142,6 @@ namespace jabber.connection
     /// <summary>
     /// Manages the base stream for reading and writing full stanzas.
     /// </summary>
-    [SVN(@"$Id$")]
     public abstract class StanzaStream
     {
         /// <summary>

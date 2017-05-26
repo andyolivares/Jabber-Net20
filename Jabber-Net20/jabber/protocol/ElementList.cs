@@ -9,22 +9,19 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
 using System.Collections;
 using System.Xml;
-using bedrock.util;
 
-namespace jabber.protocol
+namespace JabberNet.jabber.protocol
 {
     /// <summary>
     /// Replacement for XmlElementList that removes the safety belt of checking for changes during traversal,
     /// but removes the big old memory leak in MS's implementation.  Also, only returns first-level children,
     /// rather than all children below here with the given name.  Thanks, MS.
     /// </summary>
-    [SVN(@"$Id$")]
     public class ElementList : XmlNodeList
     {
         private XmlElement m_parent = null;
@@ -185,7 +182,6 @@ namespace jabber.protocol
     /// <summary>
     /// Parameterized version of ElementList.
     /// </summary>
-    [SVN(@"$Id$")]
     public class TypedElementList<T> : XmlNodeList, System.Collections.Generic.IEnumerable<T>
         where T : XmlElement
     {
@@ -323,7 +319,7 @@ namespace jabber.protocol
 
             public void Dispose()
             {
-                
+
             }
 
             #endregion

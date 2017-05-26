@@ -9,19 +9,18 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  *
- * xpnet is a deriviative of James Clark's XP.  See copying.txt for more info.
+ * xpnet is a deriviative of James Clark's XP.  See licenses/xpnet_MIT.txt for
+ * more info.
  * --------------------------------------------------------------------------*/
-namespace xpnet
-{
-    using bedrock.util;
 
+namespace JabberNet.xpnet
+{
     /// <summary>
     /// Represents information returned by <code>Encoding.tokenizeContent</code>.
     /// @see Encoding#tokenizeContent
     /// </summary>
-    [SVN(@"$Id$")]
     public class ContentToken : Token
     {
         private const int INIT_ATT_COUNT = 8;

@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Enums.NET, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7ea1c1650d506225, processorArchitecture=MSIL">
+      <HintPath>..\packages\Enums.NET.2.1.1\lib\net20\Enums.NET.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -59,7 +63,6 @@
     <Compile Include="bedrock\net\Address.cs" />
     <Compile Include="bedrock\net\AsyncSocket.cs" />
     <Compile Include="bedrock\net\BaseSocket.cs" />
-    <Compile Include="bedrock\net\CertUtil.cs" />
     <Compile Include="bedrock\net\Exceptions.cs" />
     <Compile Include="bedrock\net\HttpSocket.cs" />
     <Compile Include="bedrock\net\IHttpSocket.cs" />
@@ -73,41 +76,20 @@
     <Compile Include="bedrock\net\XEP25Socket.cs" />
     <Compile Include="bedrock\util\ConfigFile.cs" />
     <Compile Include="bedrock\util\GetOptBase.cs" />
-    <Compile Include="bedrock\util\IdleTime.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="bedrock\util\Version.cs" />
-    <Compile Include="jabber\client\BookmarkManager.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="jabber\client\JabberClient.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="jabber\client\PresenceManager.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="jabber\client\RosterManager.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="jabber\client\BookmarkManager.cs" />
+    <Compile Include="jabber\client\JabberClient.cs" />
+    <Compile Include="jabber\client\PresenceManager.cs" />
+    <Compile Include="jabber\client\RosterManager.cs" />
     <Compile Include="jabber\connection\BindingStanzaStream.cs" />
-    <Compile Include="jabber\connection\CapsManager.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="jabber\connection\CertificatePrompt.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="jabber\connection\ConferenceManager.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="jabber\connection\CapsManager.cs" />
+    <Compile Include="jabber\connection\ConferenceManager.cs" />
     <Compile Include="jabber\connection\DiscoManager.cs" />
     <Compile Include="jabber\connection\FileMap.cs" />
     <Compile Include="jabber\connection\HttpStanzaStream.cs" />
     <Compile Include="jabber\connection\HttpUploader.cs" />
     <Compile Include="jabber\connection\IQTracker.cs" />
     <Compile Include="jabber\connection\PollingStanzaStream.cs" />
-    <Compile Include="jabber\connection\PubSubManager.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="jabber\connection\PubSubManager.cs" />
     <Compile Include="jabber\connection\sasl\AnonymousProcessor.cs" />
     <Compile Include="jabber\connection\sasl\ExternalProcessor.cs" />
     <Compile Include="jabber\connection\sasl\KerbProcessor.cs" />
@@ -117,9 +99,7 @@
     <Compile Include="jabber\connection\SocketStanzaStream.cs" />
     <Compile Include="jabber\connection\StanzaStream.cs" />
     <Compile Include="jabber\connection\States.cs" />
-    <Compile Include="jabber\connection\StreamComponent.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="jabber\connection\StreamComponent.cs" />
     <Compile Include="jabber\connection\XmppStream.cs" />
     <Compile Include="jabber\JID.cs" />
     <Compile Include="jabber\protocol\accept\Factory.cs" />
@@ -177,9 +157,7 @@
     <Compile Include="jabber\protocol\x\Delay.cs" />
     <Compile Include="jabber\protocol\x\Event.cs" />
     <Compile Include="jabber\protocol\x\Factory.cs" />
-    <Compile Include="jabber\server\JabberService.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="jabber\server\JabberService.cs" />
     <Compile Include="jabber\server\XdbTracker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="stringprep\Nameprep.cs" />
@@ -190,7 +168,6 @@
     <Compile Include="stringprep\steps\NFKCStep.cs" />
     <Compile Include="stringprep\steps\ProfileStep.cs" />
     <Compile Include="stringprep\steps\ProhibitStep.cs" />
-    <Compile Include="stringprep\steps\ResourceLoader.cs" />
     <Compile Include="stringprep\steps\RFC3454.cs" />
     <Compile Include="stringprep\unicode\Combining.cs" />
     <Compile Include="stringprep\unicode\CombiningData.cs" />
@@ -208,19 +185,6 @@
     <Compile Include="xpnet\UTF8Encoding.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="jabber\client\JabberClient.bmp" />
-    <Content Include="jabber\client\PresenceManager.bmp" />
-    <Content Include="jabber\client\RosterManager.bmp" />
-    <Content Include="jabber\connection\CapsManager.bmp" />
-    <Content Include="jabber\connection\ConferenceManager.bmp" />
-    <Content Include="jabber\connection\DiscoManager.bmp" />
-    <Content Include="jabber\connection\PubSubManager.bmp" />
-    <Content Include="jabber\server\JabberService.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="jabber\client\JabberClient.resx">
-      <DependentUpon>JabberClient.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="jabber\client\PresenceManager.resx">
       <DependentUpon>PresenceManager.cs</DependentUpon>
     </EmbeddedResource>
@@ -228,25 +192,16 @@
     <EmbeddedResource Include="jabber\client\RosterManager.resx">
       <DependentUpon>RosterManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="jabber\connection\CertificatePrompt.resx">
-      <DependentUpon>CertificatePrompt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="jabber\connection\XmppStream.resx">
-      <DependentUpon>XmppStream.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="jabber\server\JabberService.resources" />
-    <EmbeddedResource Include="jabber\server\JabberService.resx">
-      <DependentUpon>JabberService.cs</DependentUpon>
-    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="stringprep\steps\RFC3454.resx">
       <DependentUpon>RFC3454.cs</DependentUpon>
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\netlib.Dns\netlib.Dns.csproj">
+    <ProjectReference Include="..\JabberNet.Netlib.Dns\JabberNet.Netlib.Dns.csproj">
       <Project>{40ac7a7c-d3e5-46df-b740-06bd9d2a00e1}</Project>
-      <Name>netlib.Dns</Name>
+      <Name>JabberNet.Netlib.Dns</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

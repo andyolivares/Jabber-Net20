@@ -9,15 +9,12 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
 using System.Xml;
 
-using bedrock.util;
-
-namespace jabber.protocol.iq
+namespace JabberNet.jabber.protocol.iq
 {
     /*
      *  <iq id='l4' type='result' from='user@host'>
@@ -29,7 +26,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// IQ packet with an Last query element inside.
     /// </summary>
-    [SVN(@"$Id$")]
     public class LastIQ : jabber.protocol.client.TypedIQ<Last>
     {
         /// <summary>
@@ -44,7 +40,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// A Last query element, which requests the last activity from an entity.
     /// </summary>
-    [SVN(@"$Id$")]
     public class Last : Element
     {
         /// <summary>

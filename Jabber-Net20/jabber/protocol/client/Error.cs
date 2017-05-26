@@ -9,15 +9,13 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
+using System;
 using System.Xml;
 
-using bedrock.util;
-
-namespace jabber.protocol.client
+namespace JabberNet.jabber.protocol.client
 {
     /*
     /// <summary>
@@ -136,7 +134,6 @@ namespace jabber.protocol.client
     /// <summary>
     /// Error IQ
     /// </summary>
-    [SVN(@"$Id$")]
     public class IQError : IQ
     {
         /// <summary>
@@ -155,7 +152,6 @@ namespace jabber.protocol.client
     /// <summary>
     /// Error in a message or IQ.
     /// </summary>
-    [SVN(@"$Id$")]
     public class Error : Element
     {
         /// <summary>

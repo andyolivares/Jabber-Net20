@@ -9,22 +9,18 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
+using System;
 using System.Diagnostics;
-using System.Security.Cryptography;
 using System.Xml;
 
-using bedrock.util;
-
-namespace jabber.protocol.iq
+namespace JabberNet.jabber.protocol.iq
 {
     /// <summary>
     /// An auth IQ.
     /// </summary>
-    [SVN(@"$Id$")]
     public class AuthIQ : jabber.protocol.client.TypedIQ<Auth>
     {
         /// <summary>
@@ -40,7 +36,6 @@ namespace jabber.protocol.iq
     /// Client authentication, with digest support.  Call SetAuth() to compute
     /// the digest.
     /// </summary>
-    [SVN(@"$Id$")]
     public class Auth : Element
     {
         /// <summary>

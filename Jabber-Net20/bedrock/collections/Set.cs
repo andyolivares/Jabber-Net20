@@ -9,19 +9,17 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
+
 using System;
-
 using System.Collections;
-using bedrock.util;
 
-namespace bedrock.collections
+namespace JabberNet.bedrock.collections
 {
     /// <summary>
     /// The different ways a set can be implemented.
     /// </summary>
-    [SVN(@"$Id$")]
     public enum SetImplementation
     {
         /// <summary>
@@ -41,7 +39,6 @@ namespace bedrock.collections
     /// <summary>
     /// Set backed into a Tree.
     /// </summary>
-    [SVN(@"$Id$")]
     public class Set : ISet
     {
         private static readonly object s_nothing = new object();

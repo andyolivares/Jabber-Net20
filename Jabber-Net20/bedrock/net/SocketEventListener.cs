@@ -9,12 +9,12 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
+
 using System;
 
-using bedrock.util;
-namespace bedrock.net
+namespace JabberNet.bedrock.net
 {
     /// <summary>
     /// Interface class for Socket events. Any object which
@@ -22,7 +22,6 @@ namespace bedrock.net
     /// events.  This is an interface instead of events in order
     /// to preserve symmetry with libbedrock.
     /// </summary>
-    [SVN(@"$Id$")]
     public interface ISocketEventListener
     {
         /// <summary>
@@ -98,7 +97,6 @@ namespace bedrock.net
     /// <summary>
     /// Default, empty implementation of ISocketEventListener
     /// </summary>
-    [SVN(@"$Id$")]
     public class SocketEventListener : ISocketEventListener
     {
         #region Implementation of ISocketEventListener

@@ -9,25 +9,21 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
+
 using System;
 using System.Collections;
-using System.Diagnostics;
 using System.Xml;
+using JabberNet.bedrock.io;
+using JabberNet.xpnet;
 
-using xpnet;
-
-using bedrock.io;
-using bedrock.util;
-
-namespace jabber.protocol
+namespace JabberNet.jabber.protocol
 {
     /// <summary>
     /// Summary description for AsynchElementStream.
     /// TODO: combine with ElementStream, since there's only one impl now.
     /// </summary>
-    [SVN(@"$Id$")]
     public class AsynchElementStream : ElementStream
     {
         private static System.Text.Encoding utf = System.Text.Encoding.UTF8;
@@ -327,7 +323,6 @@ namespace jabber.protocol
         /// <summary>
         /// There was an error parsing XML.  What was the context?
         /// </summary>
-        [SVN(@"$Id$")]
         public class XMLParseException : Exception
         {
             private string m_context = null;

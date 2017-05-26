@@ -9,18 +9,16 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
 using System.Collections;
-using bedrock.util;
-namespace bedrock.collections
+
+namespace JabberNet.bedrock.collections
 {
     /// <summary>
     /// A node in a Graph, such as a Tree
     /// </summary>
-    [SVN(@"$Id$")]
     public class GraphNode : IEnumerable
     {
         private object      m_key      = null;
@@ -38,7 +36,7 @@ namespace bedrock.collections
         }
         /// <summary>
         /// Creates a new node, with key and data, possibly having
-        /// sorted children. 
+        /// sorted children.
         /// </summary>
         /// <param name="key">The key used to retrieve the data</param>
         /// <param name="data">The data in the node</param>
@@ -74,7 +72,7 @@ namespace bedrock.collections
             get { return m_data; }
             set { m_data = value; }
         }
-        
+
         /// <summary>
         /// Adds a new child node
         /// </summary>

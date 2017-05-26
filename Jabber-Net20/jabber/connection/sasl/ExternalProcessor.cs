@@ -9,22 +9,18 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
-using System.IO;
+
 using System.Diagnostics;
 using System.Xml;
+using JabberNet.jabber.protocol.stream;
 
-using bedrock.util;
-using jabber.protocol.stream;
-
-namespace jabber.connection.sasl
+namespace JabberNet.jabber.connection.sasl
 {
     /// <summary>
     /// SASL Mechanism EXTERNAL as specified in XEP-0178.
     /// </summary>
-    [SVN(@"$Id$")]
     public class ExternalProcessor : SASLProcessor
     {
         /// <summary>

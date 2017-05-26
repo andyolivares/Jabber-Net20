@@ -9,21 +9,18 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
-using System.Xml;
-using System.IO;
-using System.Diagnostics;
 using System.Collections;
-using bedrock.util;
-namespace bedrock.util
+using System.IO;
+using System.Xml;
+
+namespace JabberNet.bedrock.util
 {
     /// <summary>
     /// XML configuration file manager.
     /// </summary>
-    [SVN(@"$Id$")]
     public class ConfigFile
     {
         private string m_file;

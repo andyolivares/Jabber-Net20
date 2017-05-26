@@ -9,30 +9,25 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading;
 
-using bedrock.util;
-
-namespace bedrock.net
+namespace JabberNet.bedrock.net
 {
     /// <summary>
     /// Do basic HTTP processing, with a long-lived socket.
     /// TODO: the BaseSocket parameter in the listener events will always be null for now.
     /// TODO: change HttpSocket to be a is-a of AsyncSocket, not has-a.
     /// </summary>
-    [SVN(@"$Id$")]
     public class HttpSocket : BaseSocket, ISocketEventListener
-	{
+    {
         private class PendingRequest
         {
             public string Method;
@@ -95,7 +90,7 @@ namespace bedrock.net
         private int m_maxErrors = 5;
         private int m_errorCount = 0;
         private object m_lock = new Object();
-                
+
         private static readonly byte[] SPACE = ENC.GetBytes(" ");
         private static readonly byte[] CRLF = ENC.GetBytes("\r\n");
         private static readonly byte[] COL_SP = ENC.GetBytes(": ");
@@ -113,7 +108,6 @@ namespace bedrock.net
         /// <summary>
         /// The URI of the HTTP proxy.  Note: HTTPS connections through a proxy are not yet supported.
         /// </summary>
-        [DefaultValue(null)]
         public Uri ProxyURI
         {
             get { return m_proxyURI; }
@@ -123,7 +117,6 @@ namespace bedrock.net
         /// <summary>
         /// Username/password for the proxy.
         /// </summary>
-        [DefaultValue(null)]
         public NetworkCredential ProxyCredentials
         {
             get { return m_proxyCredentials; }
@@ -133,7 +126,6 @@ namespace bedrock.net
         /// <summary>
         /// How long to wait before attempting to reconnect, in seconds.
         /// </summary>
-        [DefaultValue(10.0f)]
         public float ReconnectTimeout
         {
             get { return m_connectRetrySec; }
@@ -143,7 +135,6 @@ namespace bedrock.net
         /// <summary>
         /// The maximum number of reconnect attempts before giving up.
         /// </summary>
-        [DefaultValue(5)]
         public int MaxErrors
         {
             get { return m_maxErrors; }
@@ -283,7 +274,7 @@ namespace bedrock.net
         void ISocketEventListener.OnInit(BaseSocket newSock)
         {
             // This is the one listener event with a good socket, but it might not be the one that anyone expects.
-            // The important thing is that if someone wants to set the TCP buffer sizes downstream, it 
+            // The important thing is that if someone wants to set the TCP buffer sizes downstream, it
             // will work.
             m_listener.OnInit(newSock);
         }
@@ -600,7 +591,7 @@ namespace bedrock.net
         }
 
         /// <summary>
-        /// Are we currently connected? 
+        /// Are we currently connected?
         /// </summary>
         public override bool Connected
         {

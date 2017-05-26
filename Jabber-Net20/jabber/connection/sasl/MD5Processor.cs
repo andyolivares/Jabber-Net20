@@ -9,26 +9,23 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
+
 using System;
 using System.Diagnostics;
-using System.Collections;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.IO;
 using System.Xml;
+using JabberNet.jabber.protocol.stream;
 
-using bedrock.util;
-using jabber.protocol.stream;
-
-namespace jabber.connection.sasl
+namespace JabberNet.jabber.connection.sasl
 {
     /// <summary>
     /// RFC2831 DIGEST-MD5 SASL mechanism
     /// </summary>
-    [SVN(@"$Id$")]
     public class MD5Processor : SASLProcessor
     {
         /// <summary>
@@ -187,14 +184,9 @@ namespace jabber.connection.sasl
             {
                 throw new InvalidServerChallengeException("Missing nonce directive");
             }
-            if ( (n = this[QOP]) != null)
-            {
-                m_qop = n.ToString();
-            }
-            else
-            {
-                throw new InvalidServerChallengeException("Missing qop directive");
-            }
+
+            m_qop = this[QOP] ?? "auth"; // OpenFire doesn't send that and defaults to "auth" instead
+            
             if ( (n = this[CHARSET]) != null)
             {
                 m_charset = n.ToString();

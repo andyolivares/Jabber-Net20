@@ -9,32 +9,25 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.IO;
 using System.Net;
-using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Xml;
-using bedrock.util;
+using JabberNet.jabber.protocol;
+using JabberNet.jabber.protocol.stream;
 
-using jabber.protocol.stream;
-using jabber.connection;
-using jabber.protocol;
-
-namespace bedrock.net
-{    
+namespace JabberNet.bedrock.net
+{
     /// <summary>
     /// XEP-0124 Error conditions
     /// </summary>
-    [SVN(@"$Id$")]
     public class XEP124Exception : WebException
     {
         /// <summary>
@@ -51,7 +44,6 @@ namespace bedrock.net
     /// Make a XEP-124 (http://www.xmpp.org/extensions/xep-0124.html) polling "connection" look like a socket.
     /// TODO: get rid of the PipeStream, if possible.
     /// </summary>
-    [SVN(@"$Id$")]
     public class XEP124Socket : BaseSocket, IHttpSocket, IElementSocket, ISocketEventListener
     {
         /// <summary>
@@ -203,7 +195,7 @@ namespace bedrock.net
 
         private bool BothPending
         {
-            get { return (m_sockA != null) && (m_sockB != null) && 
+            get { return (m_sockA != null) && (m_sockB != null) &&
                           m_sockA.IsPending && m_sockB.IsPending; }
         }
 
@@ -300,7 +292,7 @@ namespace bedrock.net
             body.Type = BodyType.terminate;
 
             Enqueue(body);
-            
+
             if (m_thread != null)
                 m_thread.Join();
 
@@ -421,7 +413,7 @@ namespace bedrock.net
             // HACK: upper levels need this to come in after the
             // return from write. Double-hack: hope this doesn't get
             // gc's before the timer fires.... :)
-            
+
             //Timer t =
             new Timer(new TimerCallback(FakeTimer), null, 0, Timeout.Infinite);
         }
@@ -446,7 +438,7 @@ namespace bedrock.net
                 Random rnd = new Random();
                 long r = m_rid = (long)rnd.Next();
                 body.Content = CONTENT_TYPE;
-                
+
                 body.To = m_hostid;
                 body.Wait = m_wait;
                 body.Hold = m_hold;
@@ -457,7 +449,7 @@ namespace bedrock.net
             {
                 body.SID = m_sid;
             }
-            
+
             return body;
         }
 
@@ -523,7 +515,7 @@ namespace bedrock.net
 
                     m_listener.OnConnect(this);
                 }
-            }            
+            }
         }
 
         void ISocketEventListener.OnClose(BaseSocket sock)

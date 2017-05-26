@@ -9,21 +9,19 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
 
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml;
-using bedrock.util;
-using jabber.protocol;
-using jabber.protocol.client;
-using jabber.protocol.iq;
+using JabberNet.jabber.protocol;
+using JabberNet.jabber.protocol.client;
+using JabberNet.jabber.protocol.iq;
 
-namespace jabber.connection
+namespace JabberNet.jabber.connection
 {
     /// <summary>
     /// Manages a set of publish-subscribe (<a href="http://www.xmpp.org/extensions/xep-0060.html">XEP-60</a>) subscriptions.
@@ -36,7 +34,6 @@ namespace jabber.connection
     /// node.AutomatedSubscribe();
     /// </example>
     /// </summary>
-    [SVN(@"$Id$")]
     public class PubSubManager : StreamComponent
     {
         private class CBHolder
@@ -58,10 +55,6 @@ namespace jabber.connection
             }
         }
 
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private IContainer components = null;
         private Dictionary<JIDNode, PubSubNode> m_nodes = new Dictionary<JIDNode,PubSubNode>();
         private Dictionary<string, CBHolder> m_callbacks = new Dictionary<string, CBHolder>();
 
@@ -70,17 +63,7 @@ namespace jabber.connection
         /// </summary>
         public PubSubManager()
         {
-            InitializeComponent();
             this.OnStreamChanged += new bedrock.ObjectHandler(PubSubManager_OnStreamChanged);
-        }
-
-        /// <summary>
-        /// Creates a manager in a container.
-        /// </summary>
-        /// <param name="container">Parent container.</param>
-        public PubSubManager(IContainer container) : this()
-        {
-            container.Add(this);
         }
 
         private void PubSubManager_OnStreamChanged(object sender)
@@ -110,7 +93,7 @@ namespace jabber.connection
                 CBHolder holder = null;
                 if (!m_callbacks.TryGetValue(node, out holder))
                 {
-                    Console.WriteLine("WARNING: notification received for unknown pubsub node");
+                    Console.WriteLine(String.Format("WARNING: notification received for unknown pubsub node: {0}", node));
                     return;
                 }
                 psn = new PubSubNode(m_stream, from, node, holder.Max);
@@ -120,32 +103,6 @@ namespace jabber.connection
             }
             psn.FireItems(items);
         }
-
-        /// <summary>
-        /// Performs tasks associated with freeing, releasing, or resetting resources.
-        /// </summary>
-        /// <param name="disposing">True if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        #region Component Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            components = new System.ComponentModel.Container();
-        }
-
-        #endregion
 
         /// <summary>
         /// Notifies the client that an error occurred.  If this is set, it will be copied to
@@ -251,7 +208,7 @@ namespace jabber.connection
         /// Get the default configuration of the node.
         /// </summary>
         /// <param name="service">JID of the pub/sub service</param>
-        /// <param name="callback">Callback.  Must not be null.  Will not be called back 
+        /// <param name="callback">Callback.  Must not be null.  Will not be called back
         /// if there is an error, but instead OnError will be called.</param>
         /// <param name="state">State information to be passed back to callback</param>
         public void GetDefaults(JID service, IqCB callback, object state)
@@ -310,7 +267,6 @@ namespace jabber.connection
     /// Manages a list of items with a maximum size.  Only one item with a given ID will be in the
     /// list at a given time.
     /// </summary>
-    [SVN(@"$Id$")]
     public class ItemList : ArrayList
     {
         private Hashtable m_index = new Hashtable();
@@ -473,7 +429,6 @@ namespace jabber.connection
     /// <summary>
     /// Informs the client that a publish-subscribe error occurred.
     /// </summary>
-    [SVN(@"$Id$")]
     public class PubSubException : Exception
     {
         /// <summary>
@@ -516,7 +471,6 @@ namespace jabber.connection
     /// <summary>
     /// Manages a node to be subscribed to.  Will keep a maximum number of items.
     /// </summary>
-    [SVN(@"$Id$")]
     public class PubSubNode : StreamComponent, IEnumerable
     {
         private enum STATE
@@ -612,7 +566,7 @@ namespace jabber.connection
 
 
         /// <summary>
-        /// Informs the publisher that an item has been published 
+        /// Informs the publisher that an item has been published
         /// successfully.
         /// </summary>
         public event ItemCB OnItemPublished;
@@ -1102,7 +1056,7 @@ namespace jabber.connection
         /// <summary>
         /// Request configuration form as the owner
         /// </summary>
-        /// <param name="callback">Callback.  Must not be null.  Will not be called back 
+        /// <param name="callback">Callback.  Must not be null.  Will not be called back
         /// if there is an error, but instead OnError will be called.</param>
         /// <param name="state">State information to be passed back to callback</param>
         public void Configure(IqCB callback, object state)

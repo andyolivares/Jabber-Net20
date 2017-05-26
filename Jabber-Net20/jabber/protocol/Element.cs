@@ -9,10 +9,10 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
+
 using System;
-using System.Collections;
 using System.Diagnostics;
 using System.Reflection;
 using System.Security.Cryptography;
@@ -20,14 +20,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 
-using bedrock.util;
-
-namespace jabber.protocol
+namespace JabberNet.jabber.protocol
 {
     /// <summary>
     /// An enum that should translate "_" into "-" for use externally.
     /// </summary>
-    [SVN(@"$Id$")]
     public class DashAttribute : Attribute
     {
         /// <summary>
@@ -42,7 +39,6 @@ namespace jabber.protocol
     /// An XmlElement with type-safe accessors.  This class is not much use by itself,
     /// but provides a number of utility functions for its descendants.
     /// </summary>
-    [SVN(@"$Id$")]
     public class Element : XmlElement
     {
         /// <summary>
@@ -55,7 +51,7 @@ namespace jabber.protocol
         /// jabber:client and jabber:component:accept are removed from the root element,
         /// and empty namespace declarations are removed throughout.
         /// </summary>
-        private static readonly Regex s_RemoveNS = 
+        private static readonly Regex s_RemoveNS =
             new Regex("(?:(?<=^[^>]*)( xmlns=\"(?:jabber:client|jabber:component:accept)\")| xmlns=\"\")",
                       RegexOptions.Compiled);
 
@@ -91,8 +87,8 @@ namespace jabber.protocol
 
         /// <summary>
         /// Returns the first child element with the given type.
-        /// 
-        /// You might expect this to be slower than this["name", "uri"], but it's 
+        ///
+        /// You might expect this to be slower than this["name", "uri"], but it's
         /// probably actually faster, since that code has to check several different
         /// things, and this code can just do a type comparison.
         /// </summary>
@@ -139,13 +135,21 @@ namespace jabber.protocol
         /// <param name="value"></param>
         public void AddChild(XmlElement value)
         {
-            if (this.OwnerDocument == value.OwnerDocument)
+            if (OwnerDocument == value.OwnerDocument)
             {
-                this.AppendChild(value);
+                AppendChild(value);
             }
             else
             {
-                this.AppendChild(this.OwnerDocument.ImportNode(value, true));
+                var element = value as Element;
+                if (element != null)
+                {
+                    AppendChild(element.CloneNode(true, OwnerDocument));
+                }
+                else
+                {
+                    AppendChild(OwnerDocument.ImportNode(value, true));
+                }
             }
         }
 
@@ -300,9 +304,9 @@ namespace jabber.protocol
 
         /// <summary>
         /// If a child element exists with the given type, return it.  Otherwise,
-        /// gin up a new instance of the given type, add it as a child, 
+        /// gin up a new instance of the given type, add it as a child,
         /// and return the result.
-        /// 
+        ///
         /// This should not have the performance impact of GetOrCreateElement.
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -607,7 +611,7 @@ namespace jabber.protocol
             else
                 SetAttribute(name, val.ToString());
         }
-        
+
         /// <summary>
         /// Get an attribute cast to DateTime, using the DateTime profile
         /// of XEP-82.

@@ -9,22 +9,19 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
+
 using System;
-
-using System.Text;
 using System.Diagnostics;
-
-using bedrock.util;
+using System.Text;
 using System.Text.RegularExpressions;
 
-namespace jabber
+namespace JabberNet.jabber
 {
     /// <summary>
     /// Informs the client that an invalid JID was entered.
     /// </summary>
-    [SVN(@"$Id$")]
     public class JIDFormatException : ApplicationException
     {
         /// <summary>
@@ -66,8 +63,6 @@ namespace jabber
     /// <summary>
     /// Provides simple JID management.
     /// </summary>
-    [SVN(@"$Id$")]
-    [System.ComponentModel.TypeConverter(typeof(JIDTypeConverter))]
     public class JID : IComparable
     {
 #if !NO_STRINGPREP
@@ -80,6 +75,16 @@ namespace jabber
         private string m_server   = null;
         private string m_resource = null;
         private string m_JID      = null;
+
+	public static bool TryParse (string j, out JID jid)
+	{
+		try {
+			jid = new JID(j);
+			return true;
+		} catch { }
+		jid = null;
+		return false;
+	}
 
         /// <summary>
         /// Creates a JID from a string.
@@ -454,12 +459,12 @@ namespace jabber
         /// </summary>
         public JID BareJID
         {
-            get 
+            get
             {
                 parse();
                 if (m_resource == null)
                     return this; // already bare
-                return new JID(m_user, m_server, null, build(m_user, m_server, null)); 
+                return new JID(m_user, m_server, null, build(m_user, m_server, null));
             }
         }
 
@@ -515,7 +520,7 @@ namespace jabber
                 count++;
             }
             string u = sb.ToString();
-            return new JID(u, server, resource); 
+            return new JID(u, server, resource);
         }
 
         /// <summary>
@@ -607,117 +612,5 @@ namespace jabber
             return this.m_resource.CompareTo(oj.m_resource);
         }
         #endregion
-    }
-
-    /// <summary>
-    /// Convert a JID to and from a string, so that JIDs can be used as properties for
-    /// components, and have those properties set at design time.
-    /// </summary>
-    public class JIDTypeConverter : System.ComponentModel.TypeConverter
-    {
-        /// <summary>
-        /// Returns whether this converter can convert an object of one type to the type of this converter. 
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="sourceType"></param>
-        /// <returns></returns>
-        public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext context, Type sourceType)
-        {
-            if (sourceType == null)
-            {
-                throw new ArgumentNullException("sourceType");
-            }
-            return ((sourceType == typeof(string)) || 
-                    (typeof(JID).IsAssignableFrom(sourceType) || 
-                     base.CanConvertFrom(context, sourceType)));
-        }
-
-        /// <summary>
-        /// Returns whether this converter can convert the object to the specified type. 
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="destinationType"></param>
-        /// <returns></returns>
-        public override bool CanConvertTo(System.ComponentModel.ITypeDescriptorContext context, Type destinationType)
-        {
-             return ((destinationType == typeof(string)) || 
-                     ((destinationType == typeof(JID)) || 
-                    base.CanConvertTo(context, destinationType)));
-        }
-
-        /// <summary>
-        /// Returns whether the given value object is valid for this type.
-        /// Empty strings are allowed, since they will map to null.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public override bool IsValid(System.ComponentModel.ITypeDescriptorContext context, object value)
-        {
-            string s = value as string;
-            JID j;
-            if (s != null)
-            {
-                if (s == "")
-                    return true;
-
-                try
-                {
-                    j = new JID(s);
-                }
-                catch (JIDFormatException)
-                {
-                    return false;
-                }
-                return true;
-            }
-            j = value as JID;
-            return (j != null);
-        }
-
-        /// <summary>
-        /// Converts the given value to the type of this converter.
-        /// Empty strings are converted to null.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="culture"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public override object ConvertFrom(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
-        {
-            if (value == null)
-                return null;
-
-            string s = value as string;
-            if (s != null)
-            {
-                if (s == "")
-                    return null;
-                return new JID(s);
-            }
-            JID j = value as JID;
-            if (j != null)
-                return j;
-            return base.ConvertFrom(context, culture, value);
-        }
-
-        /// <summary>
-        /// Converts the given value object to the specified type.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="culture"></param>
-        /// <param name="value"></param>
-        /// <param name="destinationType"></param>
-        /// <returns></returns>
-        public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
-        {
-            if (value == null)
-                return null;
-            if (destinationType == typeof(string))
-                return value.ToString();
-            if (destinationType == typeof(JID))
-                return value;
-            return base.ConvertTo(context, culture, value, destinationType);
-        }
     }
 }

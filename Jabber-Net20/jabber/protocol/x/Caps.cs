@@ -9,20 +9,17 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
+
 using System;
 using System.Xml;
 
-using bedrock.util;
-
-
-namespace jabber.protocol.x
+namespace JabberNet.jabber.protocol.x
 {
     /// <summary>
     /// Entity Capabilities.  See http://www.xmpp.org/extensions/xep-0115.html.
     /// </summary>
-    [SVN(@"$Id$")]
     public class Caps : Element
     {
         private static readonly char[] SPLIT = " ".ToCharArray();

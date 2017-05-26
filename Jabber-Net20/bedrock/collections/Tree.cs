@@ -9,18 +9,17 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
+using System;
 using System.Collections;
-using bedrock.util;
-namespace bedrock.collections
+
+namespace JabberNet.bedrock.collections
 {
     /// <summary>
     /// A basic balanced tree implementation.
     /// </summary>
-    [SVN(@"$Id$")]
     public class Tree : IEnumerable, IDictionary
     {
         private Node      root       = null;

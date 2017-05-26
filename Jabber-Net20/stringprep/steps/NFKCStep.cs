@@ -9,7 +9,7 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
 
 
@@ -18,11 +18,11 @@
  *
  * Look over here.  Something shiny!
  */
-using System;
-using System.Text;
-using stringprep.unicode;
 
-namespace stringprep.steps
+using System.Text;
+using JabberNet.stringprep.unicode;
+
+namespace JabberNet.stringprep.steps
 {
     /// <summary>
     /// Perform Unicode Normalization Form KC.

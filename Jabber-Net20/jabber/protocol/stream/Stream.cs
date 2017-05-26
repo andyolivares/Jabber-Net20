@@ -9,21 +9,17 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
 using System.Security.Cryptography;
 using System.Xml;
-using bedrock.util;
-using jabber.protocol;
 
-namespace jabber.protocol.stream
+namespace JabberNet.jabber.protocol.stream
 {
     /// <summary>
     /// The fabled stream:stream packet.  Id's get assigned automatically on allocation.
     /// </summary>
-    [SVN(@"$Id$")]
     public class Stream : Packet
     {
         private static readonly RandomNumberGenerator RNG = RandomNumberGenerator.Create();

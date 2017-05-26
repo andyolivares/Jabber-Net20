@@ -9,24 +9,18 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
+
 using System.Xml;
 
-using jabber;
-using jabber.protocol;
-
-using bedrock.util;
-
-namespace jabber.protocol.iq
+namespace JabberNet.jabber.protocol.iq
 {
     /// <summary>
-    /// For nodes with a node access model of "whitelist", if the requesting 
-    /// entity is not on the whitelist then the service MUST return a 
+    /// For nodes with a node access model of "whitelist", if the requesting
+    /// entity is not on the whitelist then the service MUST return a
     /// not-allowed error, specifying a pubsub-specific error condition of closed-node.
     /// </summary>
-    [SVN(@"$Id$")]
     public class ClosedNode : Element
 	{
         /// <summary>
@@ -53,7 +47,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// The node must be configured.
     /// </summary>
-    [SVN(@"$Id$")]
     public class ConfigurationRequired : Element
     {
         /// <summary>
@@ -79,7 +72,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// An invalid JID was specified
     /// </summary>
-    [SVN(@"$Id$")]
     public class InvalidJID : Element
     {
         /// <summary>
@@ -106,7 +98,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// Invalid options were specified
     /// </summary>
-    [SVN(@"$Id$")]
     public class InvalidOptions : Element
     {
         /// <summary>
@@ -133,7 +124,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// An invalid item was specified.
     /// </summary>
-    [SVN(@"$Id$")]
     public class InvalidPayload : Element
     {
         /// <summary>
@@ -143,7 +133,7 @@ namespace jabber.protocol.iq
         public InvalidPayload(XmlDocument doc)
             : base("invalid-payload", URI.PUBSUB_ERRORS, doc)
         {
-            
+
         }
 
         /// <summary>
@@ -161,7 +151,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// An invalid ID was specified.
     /// </summary>
-    [SVN(@"$Id$")]
     public class InvalidSubid : Element
     {
         /// <summary>
@@ -188,7 +177,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// An item was forbidden.
     /// </summary>
-    [SVN(@"$Id$")]
     public class ItemForbidden : Element
     {
         /// <summary>
@@ -199,7 +187,7 @@ namespace jabber.protocol.iq
             : base("item-forbidden", URI.PUBSUB_ERRORS, doc)
         {
             // lambda, the forbidden function
-            // cf: http://snurl.com/2gduz 
+            // cf: http://snurl.com/2gduz
         }
 
         /// <summary>
@@ -217,7 +205,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// An item was required, but was not specified.
     /// </summary>
-    [SVN(@"$Id$")]
     public class ItemRequired : Element
     {
         /// <summary>
@@ -244,7 +231,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// A JID was required, but not specified.
     /// </summary>
-    [SVN(@"$Id$")]
     public class JIDRequired : Element
     {
         /// <summary>
@@ -271,7 +257,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// The maximum number of items was exceeded.
     /// </summary>
-    [SVN(@"$Id$")]
     public class MaxItemsExceeded : Element
     {
         /// <summary>
@@ -298,7 +283,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// The maximum number of nodes was exceeded.
     /// </summary>
-    [SVN(@"$Id$")]
     public class MaxNodesExceeded : Element
     {
         /// <summary>
@@ -325,7 +309,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// The node was required, but not specified.
     /// </summary>
-    [SVN(@"$Id$")]
     public class NodeIDRequired : Element
     {
         /// <summary>
@@ -352,7 +335,6 @@ namespace jabber.protocol.iq
     /// Not allowed to subscribe, because you aren't in one of the correct roster
     /// groups of the publisher.
     /// </summary>
-    [SVN(@"$Id$")]
     public class NotInRosterGroup : Element
     {
         /// <summary>
@@ -379,7 +361,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// You must be subscribed to perform this function.
     /// </summary>
-    [SVN(@"$Id$")]
     public class NotSubscribed : Element
     {
         /// <summary>
@@ -406,7 +387,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// The item is too large.
     /// </summary>
-    [SVN(@"$Id$")]
     public class PayloadTooBig : Element
     {
         /// <summary>
@@ -433,7 +413,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// An item is required, but was not specified.
     /// </summary>
-    [SVN(@"$Id$")]
     public class PayloadRequired : Element
     {
         /// <summary>
@@ -459,7 +438,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// The subscription is pending.
     /// </summary>
-    [SVN(@"$Id$")]
     public class PendingSubscription : Element
     {
         /// <summary>
@@ -486,7 +464,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// You must be subscribed first.
     /// </summary>
-    [SVN(@"$Id$")]
     public class PresenceSubscriptionRequired : Element
     {
         /// <summary>
@@ -513,7 +490,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// An subscription ID is required, but was not specified.
     /// </summary>
-    [SVN(@"$Id$")]
     public class SubidRequired : Element
     {
         /// <summary>
@@ -536,11 +512,10 @@ namespace jabber.protocol.iq
         {
         }
     }
-    
+
     /// <summary>
     /// Supported features
     /// </summary>
-    [SVN(@"$Id$")]
     [Dash]
     public enum PubSubFeature
     {
@@ -717,7 +692,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// An unsupported protocol was used.
     /// </summary>
-    [SVN(@"$Id$")]
     public class Unsupported : Element
     {
         /// <summary>
@@ -753,7 +727,6 @@ namespace jabber.protocol.iq
     /// <summary>
     /// An invalid access model was specified.
     /// </summary>
-    [SVN(@"$Id$")]
     public class UnsupportedAccessModel : Element
     {
         /// <summary>

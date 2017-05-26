@@ -9,20 +9,17 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Xml;
+using JabberNet.jabber.protocol.client;
 
-using bedrock.util;
-using jabber.protocol.client;
-
-namespace jabber.connection
+namespace JabberNet.jabber.connection
 {
     /// <summary>
     /// Informs the client that a response to an IQ request has been received.
@@ -32,7 +29,6 @@ namespace jabber.connection
     /// <summary>
     /// Informs the client that an IQ has timed out.
     /// </summary>
-    [SVN(@"$Id$")]
     public class IQTimeoutException : Exception
     {
         /// <summary>
@@ -48,7 +44,6 @@ namespace jabber.connection
     ///<summary>
     /// Represents the interface for tracking an IQ packet.
     ///</summary>
-    [SVN(@"$Id$")]
     public interface IIQTracker
     {
         ///<summary>
@@ -71,7 +66,6 @@ namespace jabber.connection
     /// <summary>
     /// Tracks outstanding IQ requests.
     /// </summary>
-    [SVN(@"$Id$")]
     public class IQTracker: IIQTracker
     {
         private Dictionary<string, TrackerData> m_pending = new Dictionary<string, TrackerData>();
@@ -171,7 +165,6 @@ namespace jabber.connection
         /// <summary>
         /// Internal state for a pending tracker request
         /// </summary>
-        [SVN(@"$Id$")]
         public class TrackerData
         {
             private IqCB  cb;

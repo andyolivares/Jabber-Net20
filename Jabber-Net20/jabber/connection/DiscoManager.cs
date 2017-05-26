@@ -9,30 +9,24 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
-using System.ComponentModel;
-using System.ComponentModel.Design;
+using System;
 using System.Collections;
 using System.Diagnostics;
-using System.Xml;
 using System.Threading;
+using System.Xml;
+using JabberNet.bedrock.collections;
+using JabberNet.jabber.protocol;
+using JabberNet.jabber.protocol.client;
+using JabberNet.jabber.protocol.iq;
 
-using bedrock.util;
-using bedrock.collections;
-
-using jabber.protocol;
-using jabber.protocol.client;
-using jabber.protocol.iq;
-
-namespace jabber.connection
+namespace JabberNet.jabber.connection
 {
     /// <summary>
     /// Manages a service discovery (disco) identity. See <a href="http://www.xmpp.org/extensions/xep-0030.html">XEP-0030</a> for more information.
     /// </summary>
-    [SVN(@"$Id$")]
     public class Ident : IComparable
     {
         private string m_name;
@@ -74,7 +68,6 @@ namespace jabber.connection
         /// Retrieves the string representation of the Ident (category/type/lang/name).
         /// </summary>
         /// <returns></returns>
-        [Category("Capabilities")]
         public string Key
         {
             get
@@ -86,7 +79,6 @@ namespace jabber.connection
         /// <summary>
         /// Contains the description of the entity.
         /// </summary>
-        [Category("Text")]
         public string Name
         {
             get { return m_name; }
@@ -97,7 +89,6 @@ namespace jabber.connection
         /// Contains the capabilities category, such as server,
         /// client, gateway, directory and so on.
         /// </summary>
-        [Category("Identity")]
         public string Category
         {
             get { return m_category; }
@@ -107,7 +98,6 @@ namespace jabber.connection
         /// <summary>
         /// Contains the entity type.
         /// </summary>
-        [Category("Identity")]
         public string Type
         {
             get { return m_type; }
@@ -117,7 +107,6 @@ namespace jabber.connection
         /// <summary>
         /// xml:lang language of this identity
         /// </summary>
-        [Category("Text")]
         public string Lang
         {
             get { return m_lang; }
@@ -203,7 +192,6 @@ namespace jabber.connection
     /// <summary>
     /// Manages a JID and Node combination.
     /// </summary>
-    [SVN(@"$Id$")]
     public class JIDNode
     {
         private JID m_jid = null;
@@ -224,7 +212,6 @@ namespace jabber.connection
         /// <summary>
         /// Gets the JID.
         /// </summary>
-        [Category("Identity")]
         public JID JID
         {
             get { return m_jid; }
@@ -234,7 +221,6 @@ namespace jabber.connection
         /// <summary>
         /// Gets the Node.
         /// </summary>
-        [Category("Identity")]
         public string Node
         {
             get { return m_node; }
@@ -261,7 +247,6 @@ namespace jabber.connection
         /// <summary>
         /// Gets the JID/Node key for Hash lookup.
         /// </summary>
-        [Browsable(false)]
         public string Key
         {
             get { return GetKey(m_jid, m_node); }
@@ -315,7 +300,6 @@ namespace jabber.connection
     ///
     /// NOTE: If you have multiple connections in the same process, they all share the same Disco cache.
     /// </summary>
-    [SVN(@"$Id$")]
     public class DiscoNode : JIDNode, IEnumerable
     {
         /// <summary>
@@ -372,7 +356,7 @@ namespace jabber.connection
 
         /// <summary>
         /// Add a callback for when features are received.
-        /// 
+        ///
         /// Calls the callback immediately if the features have already been retrieved.
         /// </summary>
         /// <param name="manager"></param>
@@ -400,7 +384,7 @@ namespace jabber.connection
 
         /// <summary>
         /// Add a callback for when items are received.
-        /// 
+        ///
         /// Calls the callback immediately if the items have already been retrieved.
         /// </summary>
         /// <param name="manager"></param>
@@ -428,7 +412,7 @@ namespace jabber.connection
 
         /// <summary>
         /// Add a callback for when identities are received.
-        /// 
+        ///
         /// Calls the callback immediately if the features have already been retrieved.
         /// </summary>
         /// <param name="manager"></param>
@@ -456,7 +440,6 @@ namespace jabber.connection
         /// <summary>
         /// Gets or sets the string representation of the first identity.
         /// </summary>
-        [Category("Info")]
         public string Name
         {
             set { m_name = value; }
@@ -483,7 +466,6 @@ namespace jabber.connection
         /// <summary>
         /// Determines whether or not the disco#info packet has been sent.
         /// </summary>
-        [Category("Status")]
         public bool PendingInfo
         {
             get { return m_pendingInfo; }
@@ -492,7 +474,6 @@ namespace jabber.connection
         /// <summary>
         /// Determines whether or not the disco#items packet has been sent.
         /// </summary>
-        [Category("Status")]
         public bool PendingItems
         {
             get { return m_pendingItems; }
@@ -501,7 +482,6 @@ namespace jabber.connection
         /// <summary>
         /// Retrieves the features associated with this node.
         /// </summary>
-        [Category("Info")]
         public string[] FeatureNames
         {
             get
@@ -515,7 +495,6 @@ namespace jabber.connection
         /// <summary>
         /// Retrieves the disco identities of the node.
         /// </summary>
-        [Category("Info")]
         public string[] Identities
         {
             get
@@ -641,7 +620,7 @@ namespace jabber.connection
         {
             if (Features == null)
                 Features = new StringSet();
-            
+
             Features.Add(feature);
         }
 
@@ -649,7 +628,7 @@ namespace jabber.connection
         /// Remove a single feature from the node.
         /// Does not fire OnFeatures, since this should mostly be used by
         /// things that are not querying externally.
-        /// 
+        ///
         /// No exception should be thrown if the feature doesn't exist.
         /// </summary>
         /// <param name="feature">The feature URI to remove</param>
@@ -838,33 +817,16 @@ namespace jabber.connection
     // TODO: once etags are finished, make all of this information cached on disk.
     // TODO: cache XEP-115 client caps data to disk
     // TODO: add negative caching
-    [SVN(@"$Id$")]
     public class DiscoManager : StreamComponent, IEnumerable
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-#pragma warning disable 0414
-        private System.ComponentModel.Container components = null;
-#pragma warning restore 0414
         private DiscoNode m_root = null;
         private Tree m_items = new Tree();
-
-        /// <summary>
-        /// Creates a new DiscoManager and associates it with a parent container.
-        /// </summary>
-        /// <param name="container">Parent container.</param>
-        public DiscoManager(System.ComponentModel.IContainer container) : this()
-        {
-            container.Add(this);
-        }
 
         /// <summary>
         /// Creates a new DiscoManager.
         /// </summary>
         public DiscoManager()
         {
-            InitializeComponent();
             this.OnStreamChanged +=new bedrock.ObjectHandler(DiscoManager_OnStreamChanged);
         }
 
@@ -877,7 +839,7 @@ namespace jabber.connection
         /// </summary>
         public DiscoNode Root
         {
-            get 
+            get
             {
                 if (m_root != null)
                     return m_root;
@@ -885,7 +847,7 @@ namespace jabber.connection
                     return null;
                 // GetNode locks.
                 m_root = GetNode(m_stream.Server);
-                return m_root; 
+                return m_root;
             }
         }
 
@@ -1181,7 +1143,7 @@ namespace jabber.connection
         /// <summary>
         /// Retrieves the features associated with this node and
         /// then calls back on the handler.
-        /// 
+        ///
         /// If caching is specified, items already in the cache call the handler
         /// immediately.
         /// </summary>
@@ -1231,7 +1193,7 @@ namespace jabber.connection
         /// <summary>
         /// Retrieves the child items associated with this node,
         /// and then calls back on the handler.
-        /// 
+        ///
         /// If caching is specified, items already in the cache call the handler
         /// immediately.
         /// </summary>
@@ -1317,16 +1279,5 @@ namespace jabber.connection
             FindServiceRequest req = new FindServiceRequest(featureURI, handler);
             BeginGetItems(Root, new DiscoNodeHandler(req.GotRootItems), state);  // hopefully enough to prevent GC.
         }
-
-        #region Component Designer generated code
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            components = new System.ComponentModel.Container();
-        }
-        #endregion
     }
 }

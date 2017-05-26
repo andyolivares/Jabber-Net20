@@ -9,23 +9,21 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
+
 using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Xml;
+using JabberNet.bedrock.net;
+using JabberNet.jabber.protocol;
 
-using bedrock.net;
-using bedrock.util;
-using jabber.protocol;
-
-namespace jabber.connection
+namespace JabberNet.jabber.connection
 {
     /// <summary>
     /// Contains the types of proxies Jabber-Net supports.  This is only for socket connections.
     /// </summary>
-    [SVN(@"$Id$")]
     public enum ProxyType
     {
         /// <summary>
@@ -50,7 +48,6 @@ namespace jabber.connection
     /// <summary>
     /// "Standard" XMPP socket for outbound connections.
     /// </summary>
-    [SVN(@"$Id$")]
     public class SocketStanzaStream : StanzaStream, ISocketEventListener
     {
         private AsynchElementStream m_elements = null;
@@ -215,19 +212,16 @@ namespace jabber.connection
             string host = (string)m_listener[Options.NETWORK_HOST];
             if ((host == null) || (host == ""))
             {
-#if __MonoCS__
                 host = to;
-#else
                 try
                 {
                     Address.LookupSRV((string)m_listener[Options.SRV_PREFIX], to, ref host, ref port);
                 }
-                catch
+                catch (Exception ex)
                 {
-                    Debug.WriteLine("WARNING: netlib.Dns.dll missing");
+                    Debug.WriteLine("WARNING: DNS SRV lookup failed: " + ex);
                     host = to;
                 }
-#endif
             }
 
             Address addr = new Address(host, port);

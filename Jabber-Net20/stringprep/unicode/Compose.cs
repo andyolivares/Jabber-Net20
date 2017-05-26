@@ -9,12 +9,10 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
-
-namespace stringprep.unicode
+namespace JabberNet.stringprep.unicode
 {
     /// <summary>
     /// Combine combining characters, where possible.

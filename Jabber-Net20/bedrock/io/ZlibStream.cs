@@ -9,21 +9,18 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
+
 using System;
 using System.IO;
-using System.Diagnostics;
-
-using bedrock.util;
 using ComponentAce.Compression.Libs.zlib;
 
-namespace bedrock.io
+namespace JabberNet.bedrock.io
 {
     /// <summary>
     /// Compression failed.
     /// </summary>
-    [SVN(@"$Id$")]
     public class CompressionFailedException : ApplicationException
     {
         /// <summary>
@@ -46,7 +43,6 @@ namespace bedrock.io
     /// No, System.IO.Compression.GZipStream won't work, because they didn't expose
     /// compression levels or flush types.
     /// </summary>
-    [SVN(@"$Id$")]
     public class ZlibStream : Stream
     {
         /// <summary>

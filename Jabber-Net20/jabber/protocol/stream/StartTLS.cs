@@ -9,19 +9,16 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
+
 using System.Xml;
 
-using bedrock.util;
-
-namespace jabber.protocol.stream
+namespace JabberNet.jabber.protocol.stream
 {
     /// <summary>
     /// Start-TLS in stream features.
     /// </summary>
-    [SVN(@"$Id$")]
     public class StartTLS : Element
     {
         /// <summary>
@@ -73,7 +70,6 @@ namespace jabber.protocol.stream
     /// <summary>
     /// Start-TLS proceed.
     /// </summary>
-    [SVN(@"$Id$")]
     public class Proceed : Element
     {
         /// <summary>
@@ -100,7 +96,6 @@ namespace jabber.protocol.stream
     /// <summary>
     /// Start-TLS failure.
     /// </summary>
-    [SVN(@"$Id$")]
     public class TLSFailure : Element
     {
         /// <summary>

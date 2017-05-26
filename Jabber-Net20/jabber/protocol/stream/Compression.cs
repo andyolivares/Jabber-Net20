@@ -9,19 +9,16 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
+
 using System.Xml;
 
-using bedrock.util;
-
-namespace jabber.protocol.stream
+namespace JabberNet.jabber.protocol.stream
 {
     /// <summary>
     /// XEP-138 compression.
     /// </summary>
-    [SVN(@"$Id$")]
     public class Compression : Element
     {
         /// <summary>
@@ -88,7 +85,6 @@ namespace jabber.protocol.stream
     /// <summary>
     /// XEP-138 compression failure.
     /// </summary>
-    [SVN(@"$Id$")]
     public class CompressionFailure : Element
     {
         /// <summary>
@@ -131,7 +127,6 @@ namespace jabber.protocol.stream
     /// <summary>
     /// XEP-138 compression start.
     /// </summary>
-    [SVN(@"$Id$")]
     public class Compress : Element
     {
         /// <summary>
@@ -168,7 +163,6 @@ namespace jabber.protocol.stream
     /// <summary>
     /// XEP-138 compression success.
     /// </summary>
-    [SVN(@"$Id$")]
     public class Compressed : Element
     {
         /// <summary>

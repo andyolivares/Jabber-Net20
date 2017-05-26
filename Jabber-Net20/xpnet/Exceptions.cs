@@ -9,18 +9,17 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  *
- * xpnet is a deriviative of James Clark's XP.  See copying.txt for more info.
+ * xpnet is a deriviative of James Clark's XP.  See licenses/xpnet_MIT.txt for
+ * more info.
  * --------------------------------------------------------------------------*/
-namespace xpnet
-{
-    using bedrock.util;
 
+namespace JabberNet.xpnet
+{
     /// <summary>
     /// Base class for other exceptions
     /// </summary>
-    [SVN(@"$Id$")]
     public class TokenException : System.Exception
     {
     }
@@ -29,7 +28,6 @@ namespace xpnet
     /// An empty token was detected.  This only happens with a buffer of length 0 is passed in
     /// to the parser.
     /// </summary>
-    [SVN(@"$Id$")]
     public class EmptyTokenException : TokenException
     {
     }
@@ -37,7 +35,6 @@ namespace xpnet
     /// <summary>
     /// End of prolog.
     /// </summary>
-    [SVN(@"$Id$")]
     public class EndOfPrologException : TokenException
     {
     }
@@ -48,7 +45,6 @@ namespace xpnet
      * would throw this if the byte subarray consists of a legal XML name.
      * @version $Revision$ $Date$
      */
-    [SVN(@"$Id$")]
     public class ExtensibleTokenException : TokenException
     {
         private TOK tokType;
@@ -74,7 +70,6 @@ namespace xpnet
     /// <summary>
     /// Several kinds of token problems.
     /// </summary>
-    [SVN(@"$Id$")]
     public class InvalidTokenException : TokenException
     {
         private int offset;
@@ -146,7 +141,6 @@ namespace xpnet
      * more bytes were added.
      * @version $Revision$ $Date$
      */
-    [SVN(@"$Id$")]
     public class PartialCharException : PartialTokenException
     {
         private int leadByteIndex;
@@ -173,7 +167,6 @@ namespace xpnet
     /// <summary>
     /// A partial token was received.  Try again, after you add more bytes to the buffer.
     /// </summary>
-    [SVN(@"$Id$")]
     public class PartialTokenException : TokenException
     {
     }

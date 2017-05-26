@@ -9,13 +9,13 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
-using System;
 
+using System;
 using System.Collections;
-using bedrock.util;
-namespace bedrock.collections
+
+namespace JabberNet.bedrock.collections
 {
     /// <summary>
     /// A doubly-linked list implementation, with a sentinal wrap-around
@@ -23,7 +23,6 @@ namespace bedrock.collections
     /// in System.Collections.  This may be a nicer implementation of Queue
     /// than the one in System.Collections, which uses an array.  YMMV.
     /// </summary>
-    [SVN(@"$Id$")]
     public class LinkedList : IList
     {
         private Node      m_header     = new Node(null, null, null);

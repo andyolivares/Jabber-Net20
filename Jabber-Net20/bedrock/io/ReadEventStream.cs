@@ -9,19 +9,17 @@
  * License
  *
  * Jabber-Net is licensed under the LGPL.
- * See LICENSE.txt for details.
+ * See licenses/Jabber-Net_LGPLv3.txt for details.
  * --------------------------------------------------------------------------*/
+
 using System;
-
 using System.IO;
-using bedrock.util;
 
-namespace bedrock.io
+namespace JabberNet.bedrock.io
 {
     /// <summary>
     /// Wrap a stream, so that OnRead events can be fired.
     /// </summary>
-    [SVN(@"$Id$")]
     public class ReadEventStream : Stream
     {
         private Stream m_stream;
