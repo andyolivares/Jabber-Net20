@@ -4,3 +4,6 @@
 /netlib.Dns/obj
 /netlib.Dns/bin
 /.vs
+/JabberNet.Netlib.Dns/JabberNet.Netlib.Dns.csproj.user
+/JabberNet.Netlib.Dns/bin
+/JabberNet.Netlib.Dns/obj
